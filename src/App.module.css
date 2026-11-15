@@ -5,7 +5,7 @@
   max-width: var(--app-max-width);
   min-height: 100dvh;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-5);
+  padding: calc(var(--space-6) + env(safe-area-inset-top)) var(--space-5) var(--space-6);
 }
 
 .header {
@@ -23,6 +23,14 @@
   font-size: 28px;
 }
 
+.notice {
+  padding: 14px var(--space-4);
+  border-radius: var(--radius-xl);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-deep);
+  font-size: 14px;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -30,7 +38,7 @@
   padding: 22px var(--space-5);
   border-radius: var(--radius-2xl);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-surface);
 }
 
 .eyebrow {
@@ -45,41 +53,40 @@
   line-height: 1.15;
 }
 
-.section {
+.actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: var(--space-3);
+  padding-top: var(--space-1);
 }
 
-.section h3 {
-  font-size: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: 14px;
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
-  background: var(--color-surface);
-}
-
-.tileName {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.tileMeta {
-  font-size: 12px;
+.stats {
+  font-size: 13px;
   color: var(--color-muted);
+}
+
+.summary {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.summary > span {
+  align-self: center;
+}
+
+.score {
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.gain {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary-strong);
 }

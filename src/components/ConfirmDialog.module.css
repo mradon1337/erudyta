@@ -1,0 +1,30 @@
+.dialog {
+  width: min(calc(100% - 2 * var(--space-5)), 400px);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-2xl);
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+}
+
+.title {
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.text {
+  margin-top: var(--space-2);
+  font-size: 15px;
+  color: var(--color-ink-2);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: var(--space-5);
+}

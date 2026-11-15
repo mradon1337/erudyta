@@ -4,12 +4,15 @@ import '@fontsource-variable/inter'
 import '@fontsource-variable/space-grotesk'
 import './styles/global.css'
 import { App } from './App.tsx'
+import { ProgressProvider } from './progress/ProgressProvider.tsx'
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Brak elementu #root')
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <ProgressProvider>
+      <App />
+    </ProgressProvider>
   </StrictMode>,
 )

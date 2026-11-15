@@ -48,7 +48,9 @@ przycisk „Zaczynamy”, dopisek o braku konta.
 
 **Warianty wg trybu:** bez zegara (Nauka, Powtórki) — brak pigułki czasu i jokerów; Szybka runda — jeden zegar
 na całą rundę i licznik poprawnych zamiast „Pytanie 2 z 10”; Powtórki — chip pokazuje też etap („Etap 2 z 4”).
-**Zamknięcie (X):** okno potwierdzenia „Przerwać rundę?”.
+**Zamknięcie (X lub Escape):** okno potwierdzenia „Przerwać rundę?” z przyciskami „Graj dalej” (fokus) i „Przerwij
+rundę”. Zegar w tym czasie nie staje.
+**Klawiatura:** 1–4 lub A–D wybiera odpowiedź, Enter to „Dalej”. Po przejściu do nowego pytania fokus trafia na jego treść.
 
 ## 4. Wynik — `Wynik.dc.html`
 **Zawiera:** chip z nazwą trybu, ciemna karta z pierścieniem wyniku i komentarzem, trzy statystyki (XP, seria,

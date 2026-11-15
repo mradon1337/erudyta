@@ -128,6 +128,9 @@ cień `--shadow-sheet`. Zawiera: werdykt (22 / 700), poprawną odpowiedź, blok 
 - **Przełącznik zakładek** (Ranking): tło `track`, aktywny segment biały, `aria-pressed`.
 - **Przełącznik** (Profil): 52×32, włączony `primary`, wyłączony `border-strong`, `role="switch"`.
 - **Pole tekstowe**: 54 px, promień 16, ramka 2 px `border-strong`, widoczna etykieta nad polem.
+- **Okno potwierdzenia** (np. „Przerwać rundę?”): natywny `<dialog>` otwierany `showModal()`, biały, promień 24,
+  tytuł 22 / 700, opis 15 `ink-2`, pod spodem dwa przyciski na całą szerokość — bezpieczny wybór jako główny
+  (np. „Graj dalej”, z fokusem), ryzykowny jako wtórny. Tło za oknem: `ink` z kryciem 45% (`color-mix`).
 - **Kratki wyniku** (Wyzwanie): 10 kratek 26 px, `primary` dobre, `accent-mid` złe — zawsze z opisem słownym.
 
 ## Ikony

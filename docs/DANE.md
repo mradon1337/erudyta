@@ -128,6 +128,8 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
 - `dates.ts` — `toDay(Date)`, `addDays`, `daysBetween`, `isDay`.
 - `round.ts` — `buildRound({ mode, … }, { states, today, rand })`; `seededRound(ziarno)`; `refillQuick` dla
   Szybkiej rundy po wyczerpaniu puli; `dailySeed`, `newChallengeSeed`.
+- `session.ts` — przebieg rundy jako czyste funkcje: `startSession`, `pick`, `tick`, `fiftyFifty`, `addTime`,
+  `next`; zegar liczony z przekazanego `now` (`deadline` gdy tyka, `remainingMs` gdy stoi).
 - `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
 - `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,
   `saveProgress`, `clearProgress`, `browserStore()` (localStorage albo `null`).

@@ -25,13 +25,13 @@ Pliki w `src/lib/`, każdy z testem obok. Opis algorytmów: `DANE.md`.
 w połowie), tę samą rundę dla tego samego ziarna, zerowanie serii po przerwie, odrzucenie zepsutego linku
 i zepsutego JSON-a w localStorage.
 
-## Etap 2 — Runda
+## Etap 2 — Runda ✅
 Makieta: `Quiz.dc.html`. Opis: `EKRANY.md` pkt 3.
-- [ ] Kontekst postępu (`src/progress/`: `progressContext.ts`, `ProgressProvider.tsx`, `useProgress.ts`).
-- [ ] Komponenty: `Button`, `IconButton`, `Chip`, `Icon`, `AnswerButton`, `RoundHeader`, `FeedbackSheet`.
-- [ ] Ekran rundy: zegar (liczony z `Date.now()`, nie z liczby tyknięć), jokery, panel z ciekawostką,
+- [x] Kontekst postępu (`src/progress/`: `progressContext.ts`, `ProgressProvider.tsx`, `useProgress.ts`).
+- [x] Komponenty: `Button`, `IconButton`, `Chip`, `Icon`, `AnswerButton`, `RoundHeader`, `FeedbackSheet`.
+- [x] Ekran rundy: zegar (liczony z `Date.now()`, nie z liczby tyknięć), jokery, panel z ciekawostką,
   zapis po każdej odpowiedzi, potwierdzenie wyjścia, obsługa klawiatury.
-- [ ] `App` przełącza ekrany stanem; tymczasowy przycisk „Zagraj” uruchamia rundę mieszaną.
+- [x] `App` przełącza ekrany stanem; tymczasowy przycisk „Zagraj” uruchamia rundę mieszaną.
 
 **Gotowe, gdy:** da się przejść 10 pytań myszą i samą klawiaturą; upływ czasu działa jak błąd; odświeżenie strony
 w trakcie rundy nie gubi zapisanych odpowiedzi; wszystkie 4 stany odpowiedzi wyglądają jak na makiecie.

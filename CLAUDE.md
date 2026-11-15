@@ -4,7 +4,7 @@ Quiz wiedzy ogólnej, który uczy (UI po polsku): po każdej odpowiedzi ciekawos
 w powtórkach, wynik można porównać ze znajomymi. React 19 + Vite 8 + TypeScript, CSS Modules, bez backendu
 w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna do 480 px.
 
-**Stan:** Etap 1 gotowy (logika gry w `src/lib/` z testami). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
+**Stan:** Etapy 1–2 gotowe (logika gry w `src/lib/`, ekran rundy). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
 
 ## Dokumentacja (czytaj przed pracą nad danym obszarem)
 - `docs/PLAN.md` — etapy z zadaniami i warunkami „gotowe, gdy”. Źródło prawdy o tym, co robić teraz.
@@ -23,9 +23,9 @@ w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna
 - `src/data/questions.ts` — baza pytań (`a[0]` to zawsze poprawna odpowiedź; `id` jest stałe — nowe pytania dopisuj
   na końcu kategorii). `src/data/categories.ts` — 6 kategorii. `src/data/questions.test.ts` pilnuje spójności bazy.
 - `src/styles/theme.css` — tokeny (kolory, promienie, fonty, odstępy). `src/styles/global.css` — reset i baza.
-- `src/App.tsx` — na razie ekran-zaślepka; od Etapu 2 przełącza ekrany.
-- Docelowo (patrz `docs/PLAN.md`): `src/lib/` — logika bez Reacta (`rng`, `round`, `progress`, `reviews`, `xp`,
-  `streak`, `share`, `storage`), `src/progress/` — kontekst postępu, `src/screens/`, `src/components/`.
+- `src/App.tsx` — przełącza ekrany stanem; na razie tymczasowy Start i koniec rundy (do Etapów 3–4).
+- Docelowo (patrz `docs/PLAN.md`): `src/lib/` — logika bez Reacta (`rng`, `round`, `session`, `progress`, `reviews`,
+  `xp`, `streak`, `share`, `storage`), `src/progress/` — kontekst postępu, `src/screens/`, `src/components/`.
 
 ## Zasady
 - Teksty w UI, komentarze i commity po polsku. Zwroty do użytkownika bez rodzaju („Dobrze!”, nie „Odpowiedziałeś”).
