@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Erudyta — start</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2F5BFF}a:hover{color:#2448E0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 1200px; box-sizing: border-box; background: #F3F5F9; color: #10162B; font-family: Inter, system-ui, sans-serif; overflow: hidden">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 24px 20px 100px 20px">
+
+<header style="display: flex; justify-content: space-between; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 13px; color: #5B6478">Dzień dobry</span>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em">Erudyta</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DDE2EC; font-weight: 700; font-size: 15px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-4-8.5-1 2-2 3-3.5 3.5C12 7 11 4 9 2c0 4-4 6.5-4 11.5C5 19.3 8 22 12 22z"></path></svg>
+<span>12 dni</span>
+</div>
+</header>
+
+<section style="background: #2F5BFF; color: #FFFFFF; border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Wyzwanie dnia</span>
+<span style="font-size: 13px">kończy się za 7 h</span>
+</div>
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 27px; line-height: 1.15; letter-spacing: -0.01em">10 pytań. Te same dla wszystkich.</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.45">Porównaj wynik ze znajomymi. Po każdej odpowiedzi dostajesz krótką ciekawostkę.</p>
+<div style="display: flex; align-items: center; gap: 14px">
+<a href="Quiz.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 24px; background: #FF8A3D; color: #10162B; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="#10162B" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+Graj
+</a>
+<span style="font-size: 14px">ok. 3 minuty</span>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 20px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-weight: 700; font-size: 16px">Poziom 7 · Bystrzak</span>
+<span style="font-size: 13px; color: #5B6478">640 / 1000 XP</span>
+</div>
+<div style="height: 10px; background: #E6E9F0; border-radius: 999px; overflow: hidden">
+<div style="width: 64%; height: 100%; background: #2F5BFF; border-radius: 999px"></div>
+</div>
+<span style="font-size: 13px; color: #5B6478">Jeszcze 360 XP do poziomu „Erudyta”</span>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 20px">Ścieżki wiedzy</h3>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #E5EBFF; color: #2F5BFF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21V10M15 21V10M2 10l10-6 10 6z"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Historia</span>
+<span style="font-size: 12px; color: #5B6478">62% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 62%; height: 100%; background: #2F5BFF"></span></span>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #E5EBFF; color: #2F5BFF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Geografia</span>
+<span style="font-size: 12px; color: #5B6478">48% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 48%; height: 100%; background: #2F5BFF"></span></span>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #E5EBFF; color: #2F5BFF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"></path><path d="M7 15h10"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Nauka i kosmos</span>
+<span style="font-size: 12px; color: #5B6478">71% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 71%; height: 100%; background: #2F5BFF"></span></span>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #FFEBDD; color: #C2410C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="8" cy="10" r="1"></circle><circle cx="12" cy="7.5" r="1"></circle><circle cx="16" cy="10" r="1"></circle><path d="M12 21a2 2 0 0 1 0-4h2a3 3 0 0 0 3-3"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Sztuka i kultura</span>
+<span style="font-size: 12px; color: #5B6478">35% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 35%; height: 100%; background: #E8590C"></span></span>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #FFEBDD; color: #C2410C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="15" r="6"></circle><path d="M8 3l4 6 4-6"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Sport</span>
+<span style="font-size: 12px; color: #5B6478">20% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 20%; height: 100%; background: #E8590C"></span></span>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #E5EBFF; color: #2F5BFF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z"></path><path d="M20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"></path></svg></span>
+<span style="font-weight: 700; font-size: 15px">Język i literatura</span>
+<span style="font-size: 12px; color: #5B6478">54% opanowane</span>
+<span style="display: block; height: 6px; background: #E6E9F0; border-radius: 999px; overflow: hidden"><span style="display: block; width: 54%; height: 100%; background: #2F5BFF"></span></span>
+</a>
+
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0 0 2px 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 20px">Tryby gry</h3>
+
+<a href="Quiz.dc.html" style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 12px 16px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none; box-sizing: border-box">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #10162B; color: #FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><span style="font-weight: 700; font-size: 15px">Szybka runda</span><span style="font-size: 13px; color: #5B6478">Ile zdążysz w 60 sekund?</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+
+<a href="Quiz.dc.html" style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 12px 16px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none; box-sizing: border-box">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #10162B; color: #FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><span style="font-weight: 700; font-size: 15px">Nauka bez stresu</span><span style="font-size: 13px; color: #5B6478">Bez zegara, z dłuższymi wyjaśnieniami</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+
+<a href="Ranking.dc.html" style="display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 12px 16px; background: #FFFFFF; border: 1px solid #DDE2EC; border-radius: 18px; color: #10162B; text-decoration: none; box-sizing: border-box">
+<span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #10162B; color: #FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><span style="font-weight: 700; font-size: 15px">Pojedynek</span><span style="font-size: 13px; color: #5B6478">5 pytań na żywo ze znajomym</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</section>
+
+</div>
+
+<nav aria-label="Główna nawigacja" style="position: absolute; left: 0; right: 0; bottom: 0; height: 80px; padding-bottom: 10px; box-sizing: border-box; background: #FFFFFF; border-top: 1px solid #DDE2EC; display: flex; justify-content: space-around; align-items: center">
+<a href="Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #2F5BFF; font-size: 12px; font-weight: 700; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Start</a>
+<a href="Powtorki.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"></path><path d="M3 11V9a3 3 0 0 1 3-3h15"></path><path d="M7 22l-4-4 4-4"></path><path d="M21 13v2a3 3 0 0 1-3 3H3"></path></svg>Powtórki</a>
+<a href="Ranking.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path></svg>Ranking</a>
+<a href="Profil.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg>Profil</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Erudyta — powtórki</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2F5BFF}a:hover{color:#2448E0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; background: #F3F5F9; color: #10162B; font-family: Inter, system-ui, sans-serif; overflow: hidden">
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 24px 20px 100px 20px">
+
+<header style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; letter-spacing: -0.02em">Powtórki</h1>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #3A4256">Pytania, które sprawiły Ci trudność, wracają po 1, 3, 7 i 14 dniach — aż zostaną w głowie na dobre.</p>
+</header>
+
+<section style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-radius: 24px; background: #2F5BFF; color: #FFFFFF">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Na dziś</span>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700">8 pytań</span>
+<span style="font-size: 13px">ok. 2 minuty</span>
+</div>
+<a href="Quiz.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 20px; border-radius: 14px; background: #FF8A3D; color: #10162B; font-size: 15px; font-weight: 700; text-decoration: none">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="#10162B" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+Zacznij
+</a>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DDE2EC">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 15px; font-weight: 700">Najbliższy tydzień</h2>
+<span style="font-size: 13px; color: #5B6478">47 pytań w obiegu</span>
+</div>
+<div role="img" aria-label="Liczba powtórek: dziś 8, poniedziałek 5, wtorek 12, środa 3, czwartek 9, piątek 4, sobota 6" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; align-items: end; height: 120px">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; font-weight: 700">8</span><span style="display: block; width: 100%; height: 56px; border-radius: 6px; background: #2F5BFF"></span><span style="font-size: 11px; font-weight: 700">Dziś</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">5</span><span style="display: block; width: 100%; height: 35px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">Pn</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">12</span><span style="display: block; width: 100%; height: 84px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">Wt</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">3</span><span style="display: block; width: 100%; height: 21px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">Śr</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">9</span><span style="display: block; width: 100%; height: 63px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">Cz</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">4</span><span style="display: block; width: 100%; height: 28px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">Pt</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%"><span style="font-size: 12px; color: #3A4256">6</span><span style="display: block; width: 100%; height: 42px; border-radius: 6px; background: #B8C6FF"></span><span style="font-size: 11px; color: #5B6478">So</span></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px">Twoje karty</h2>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE2EC">
+<span style="font-size: 15px; font-weight: 600">Ile kości ma szkielet dorosłego człowieka?</span>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 13px; color: #5B6478">Nauka · wraca jutro</span>
+<span style="display: flex; gap: 4px" role="img" aria-label="Etap 1 z 4"><span style="width: 18px; height: 6px; border-radius: 999px; background: #E8590C"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span></span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE2EC">
+<span style="font-size: 15px; font-weight: 600">W którym roku odbył się chrzest Polski?</span>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 13px; color: #5B6478">Historia · za 3 dni</span>
+<span style="display: flex; gap: 4px" role="img" aria-label="Etap 2 z 4"><span style="width: 18px; height: 6px; border-radius: 999px; background: #2F5BFF"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #2F5BFF"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span></span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #DDE2EC">
+<span style="font-size: 15px; font-weight: 600">Jaka jest stolica Australii?</span>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 13px; color: #5B6478">Geografia · za 7 dni</span>
+<span style="display: flex; gap: 4px" role="img" aria-label="Etap 3 z 4"><span style="width: 18px; height: 6px; border-radius: 999px; background: #2F5BFF"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #2F5BFF"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #2F5BFF"></span><span style="width: 18px; height: 6px; border-radius: 999px; background: #DDE2EC"></span></span>
+</div>
+</div>
+</section>
+
+</div>
+
+<nav aria-label="Główna nawigacja" style="position: absolute; left: 0; right: 0; bottom: 0; height: 80px; padding-bottom: 10px; box-sizing: border-box; background: #FFFFFF; border-top: 1px solid #DDE2EC; display: flex; justify-content: space-around; align-items: center">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Start</a>
+<a href="Powtorki.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #2F5BFF; font-size: 12px; font-weight: 700; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"></path><path d="M3 11V9a3 3 0 0 1 3-3h15"></path><path d="M7 22l-4-4 4-4"></path><path d="M21 13v2a3 3 0 0 1-3 3H3"></path></svg>Powtórki</a>
+<a href="Ranking.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"></path><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path></svg>Ranking</a>
+<a href="Profil.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 80px; min-height: 52px; color: #5B6478; font-size: 12px; font-weight: 600; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg>Profil</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

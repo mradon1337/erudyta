@@ -1,0 +1,62 @@
+/*
+ * Tokeny projektu „Kobalt”. Jedyne źródło kolorów, promieni i fontów —
+ * w komponentach używaj zmiennych, nie wartości wpisanych na sztywno.
+ * Opis i zasady: docs/DESIGN.md.
+ */
+:root {
+  /* Tła i powierzchnie */
+  --color-bg: #f3f5f9;
+  --color-surface: #ffffff;
+  --color-track: #e6e9f0; /* tło pasków postępu */
+
+  /* Tekst */
+  --color-ink: #10162b; /* tekst główny, ciemne przyciski */
+  --color-ink-2: #3a4256; /* tekst pomocniczy na jasnym tle */
+  --color-muted: #5b6478; /* podpisy, nieaktywne zakładki (min. 4,5:1 na bieli) */
+
+  /* Linie */
+  --color-border: #dde2ec;
+  --color-border-strong: #8e97ab; /* pola formularzy, przerywane ramki */
+
+  /* Niebieski — akcja główna, „dobrze”, postęp */
+  --color-primary: #2f5bff;
+  --color-primary-strong: #1f3fbf; /* tekst niebieski na jasnym tle */
+  --color-primary-soft: #e5ebff; /* tło poprawnej odpowiedzi, chipy */
+  --color-primary-chart: #b8c6ff; /* słupki wykresu poza „dziś” */
+
+  /* Pomarańczowy — wezwanie do gry, „źle”, seria */
+  --color-accent: #ff8a3d; /* tło przycisku „Graj” (tekst: ink) */
+  --color-accent-mid: #e8590c; /* paski i segmenty błędu */
+  --color-accent-strong: #c2410c; /* ramka i ikona błędu */
+  --color-accent-text: #b13a08; /* tekst pomarańczowy na jasnym tle */
+  --color-accent-deep: #8a2e06; /* tekst na tle accent-soft */
+  --color-accent-soft: #ffebdd; /* tło błędnej odpowiedzi, karta powtórki */
+
+  /* Typografia */
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter Variable', Inter, system-ui, sans-serif;
+
+  /* Promienie */
+  --radius-sm: 10px; /* plakietka litery A–D */
+  --radius-md: 14px; /* przyciski ikonowe, przycisk „Graj” */
+  --radius-lg: 16px; /* przyciski, odpowiedzi */
+  --radius-xl: 20px; /* karty */
+  --radius-2xl: 24px; /* karty wyróżnione */
+  --radius-sheet: 28px; /* górne rogi panelu po odpowiedzi */
+  --radius-pill: 999px;
+
+  /* Odstępy (siatka 4 px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px; /* margines boczny ekranu */
+  --space-6: 24px;
+
+  /* Wymiary */
+  --tap-min: 44px; /* najmniejszy cel dotyku */
+  --nav-height: 80px;
+  --app-max-width: 480px;
+
+  --shadow-sheet: 0 -10px 30px rgb(16 22 43 / 10%);
+}

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Erudyta — pytanie</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2F5BFF}a:hover{color:#2448E0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; background: #F3F5F9; color: #10162B; font-family: Inter, system-ui, sans-serif; overflow: hidden">
+
+<sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 20px 20px 0 20px">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" aria-label="Zakończ quiz" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #DDE2EC; color: #10162B">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</a>
+<span style="font-weight: 700; font-size: 15px">Pytanie {{ qNum }} z {{ qTotal }}</span>
+<div aria-live="polite" style="display: flex; align-items: center; gap: 6px; min-width: 76px; justify-content: center; padding: 10px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DDE2EC; font-weight: 700; font-size: 15px; color: {{ timerColor }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+<span>{{ timeStr }}</span>
+</div>
+</header>
+
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px" aria-hidden="true">
+<sc-for list="{{ segments }}" as="seg" hint-placeholder-count="5">
+<span style="display: block; height: 6px; border-radius: 999px; background: {{ seg.color }}"></span>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px; padding-top: 6px">
+<span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: #E5EBFF; color: #1F3FBF; font-size: 13px; font-weight: 700">{{ q.cat }}</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em">{{ q.q }}</h1>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{ options }}" as="opt" hint-placeholder-count="4">
+<sc-if value="{{ opt.visible }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ opt.pick }}" disabled="{{ answered }}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 58px; padding: 10px 14px; border-radius: 16px; font-family: inherit; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; box-sizing: border-box; background: {{ opt.bg }}; border: 2px solid {{ opt.border }}; color: {{ opt.fg }}">
+<span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex-shrink: 0; border-radius: 10px; font-size: 14px; font-weight: 700; background: {{ opt.badgeBg }}; color: {{ opt.badgeFg }}">{{ opt.letter }}</span>
+<span style="flex-grow: 1">{{ opt.label }}</span>
+<sc-if value="{{ opt.showCheck }}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F5BFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Poprawna odpowiedź"><path d="M5 12.5 10 17 19 7"></path></svg>
+</sc-if>
+<sc-if value="{{ opt.showX }}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2.6" stroke-linecap="round" role="img" aria-label="Błędna odpowiedź"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+</sc-if>
+</button>
+</sc-if>
+</sc-for>
+</div>
+
+<sc-if value="{{ notAnswered }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 10px">
+<button type="button" onClick="{{ useFifty }}" disabled="{{ fiftyUsed }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; flex: 1 1 0; min-height: 48px; border-radius: 14px; background: #FFFFFF; border: 1px dashed #8E97AB; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; color: {{ fiftyColor }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18"></path></svg>
+{{ fiftyLabel }}
+</button>
+<button type="button" onClick="{{ useTime }}" disabled="{{ timeUsed }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; flex: 1 1 0; min-height: 48px; border-radius: 14px; background: #FFFFFF; border: 1px dashed #8E97AB; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; color: {{ timeColor }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4M10 2h4"></path></svg>
+{{ timeLabel }}
+</button>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+<section aria-live="polite" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 14px; padding: 22px 20px 26px 20px; background: #FFFFFF; border-top: 3px solid {{ fbAccent }}; border-radius: 28px 28px 0 0; box-shadow: 0 -10px 30px rgba(16, 22, 43, 0.10)">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 22px; font-weight: 700; color: {{ fbTitleColor }}">{{ fbTitle }}</span>
+<span style="font-size: 14px; color: #3A4256">{{ fbSub }}</span>
+</div>
+<div style="display: flex; gap: 12px; padding: 14px; border-radius: 16px; background: #F3F5F9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3A4256">Ciekawostka</span>
+<span style="font-size: 15px; line-height: 1.45">{{ q.fact }}</span>
+</div>
+</div>
+<button type="button" onClick="{{ next }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; border: 0; border-radius: 16px; background: #10162B; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">
+{{ nextLabel }}
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</button>
+</section>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; height: 100%; padding: 32px 28px; box-sizing: border-box; text-align: center">
+<span style="padding: 6px 14px; border-radius: 999px; background: #E5EBFF; color: #1F3FBF; font-size: 13px; font-weight: 700">Runda ukończona</span>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 84px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">{{ score }}/{{ qTotal }}</span>
+<span style="font-size: 18px; font-weight: 700; color: #1F3FBF">+{{ xp }} XP</span>
+<p style="margin: 0; max-width: 300px; font-size: 15px; line-height: 1.5; color: #3A4256">{{ doneMsg }}</p>
+<div style="display: flex; flex-direction: column; gap: 10px; width: 100%; padding-top: 10px">
+<a href="Wynik.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 54px; border-radius: 16px; background: #2F5BFF; color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">Zobacz podsumowanie</a>
+<button type="button" onClick="{{ restart }}" style="min-height: 54px; border-radius: 16px; background: #FFFFFF; border: 2px solid #DDE2EC; color: #10162B; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Zagraj jeszcze raz</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+var QUESTIONS = [
+  { cat: 'Nauka i kosmos', q: 'Która planeta Układu Słonecznego ma najwięcej znanych księżyców?', opts: ['Jowisz', 'Saturn', 'Uran', 'Neptun'], a: 1,
+    fact: 'W 2025 roku ogłoszono odkrycie 128 nowych księżyców Saturna. Ma ich już ponad 270 — więcej niż wszystkie pozostałe planety razem.' },
+  { cat: 'Historia', q: 'W którym roku Polska wstąpiła do Unii Europejskiej?', opts: ['1999', '2004', '2007', '2009'], a: 1,
+    fact: '1 maja 2004 r. do UE weszło jednocześnie 10 państw, w tym Polska. To największe rozszerzenie w historii Unii.' },
+  { cat: 'Nauka i kosmos', q: 'Który pierwiastek ma symbol chemiczny Au?', opts: ['Srebro', 'Argon', 'Złoto', 'Glin'], a: 2,
+    fact: 'Symbol pochodzi od łacińskiego „aurum”. Złoto jest tak kowalne, że z jednego grama da się wyklepać płatek o powierzchni około 1 m².' },
+  { cat: 'Sztuka i kultura', q: 'Kto namalował „Bitwę pod Grunwaldem”?', opts: ['Józef Chełmoński', 'Jan Matejko', 'Stanisław Wyspiański', 'Jacek Malczewski'], a: 1,
+    fact: 'Matejko ukończył obraz w 1878 r. Płótno ma prawie 10 m szerokości, a podczas II wojny światowej ukrywano je przed Niemcami w Lublinie.' },
+  { cat: 'Geografia', q: 'Która rzeka jest najdłuższa w Polsce?', opts: ['Odra', 'Warta', 'Wisła', 'Bug'], a: 2,
+    fact: 'Wisła ma ponad 1000 km i płynie od Beskidu Śląskiego do Zatoki Gdańskiej. Jej dorzecze obejmuje ponad połowę powierzchni Polski.' }
+];
+var LIMIT = 20;
+
+function freshState() {
+  return { i: 0, picked: null, timedOut: false, left: LIMIT, score: 0, xp: 0, results: [], hidden: [], fiftyUsed: false, timeUsed: false, done: false };
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = freshState();
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      var s = this.state;
+      if (s.done || s.picked !== null || s.timedOut) return;
+      if (s.left <= 1) {
+        this.setState({ left: 0, timedOut: true, results: s.results.concat([false]) });
+      } else {
+        this.setState({ left: s.left - 1 });
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  pick(idx) {
+    var s = this.state;
+    if (s.picked !== null || s.timedOut || s.done) return;
+    var ok = idx === QUESTIONS[s.i].a;
+    var gain = ok ? (s.left >= 10 ? 25 : 20) : 0;
+    this.setState({ picked: idx, score: s.score + (ok ? 1 : 0), xp: s.xp + gain, results: s.results.concat([ok]) });
+  }
+
+  next() {
+    var s = this.state;
+    if (s.i >= QUESTIONS.length - 1) {
+      this.setState({ done: true });
+    } else {
+      this.setState({ i: s.i + 1, picked: null, timedOut: false, left: LIMIT, hidden: [] });
+    }
+  }
+
+  useFifty() {
+    var s = this.state;
+    if (s.fiftyUsed || s.picked !== null || s.timedOut) return;
+    var correct = QUESTIONS[s.i].a;
+    var wrong = [0, 1, 2, 3].filter(function (x) { return x !== correct; });
+    wrong.sort(function () { return Math.random() - 0.5; });
+    this.setState({ fiftyUsed: true, hidden: wrong.slice(0, 2) });
+  }
+
+  useTime() {
+    var s = this.state;
+    if (s.timeUsed || s.picked !== null || s.timedOut) return;
+    this.setState({ timeUsed: true, left: s.left + 10 });
+  }
+
+  renderVals() {
+    var s = this.state;
+    var q = QUESTIONS[s.i];
+    var answered = s.picked !== null || s.timedOut;
+    var correctPick = s.picked === q.a;
+    var self = this;
+
+    var options = q.opts.map(function (label, idx) {
+      var isCorrect = idx === q.a;
+      var isPicked = idx === s.picked;
+      var o = { label: label, letter: 'ABCD'.charAt(idx), visible: s.hidden.indexOf(idx) === -1,
+        showCheck: answered && isCorrect, showX: answered && isPicked && !isCorrect,
+        pick: function () { self.pick(idx); },
+        bg: '#FFFFFF', border: '#DDE2EC', fg: '#10162B', badgeBg: '#F3F5F9', badgeFg: '#10162B' };
+      if (answered && isCorrect) { o.bg = '#E5EBFF'; o.border = '#2F5BFF'; o.badgeBg = '#2F5BFF'; o.badgeFg = '#FFFFFF'; }
+      else if (answered && isPicked) { o.bg = '#FFEBDD'; o.border = '#C2410C'; o.badgeBg = '#C2410C'; o.badgeFg = '#FFFFFF'; }
+      else if (answered) { o.fg = '#5B6478'; o.badgeFg = '#5B6478'; }
+      return o;
+    });
+
+    var segments = QUESTIONS.map(function (_, idx) {
+      var color = '#DDE2EC';
+      if (idx < s.results.length) color = s.results[idx] ? '#2F5BFF' : '#E8590C';
+      else if (idx === s.i) color = '#10162B';
+      return { color: color };
+    });
+
+    var sec = s.left;
+    var fbTitle = correctPick ? 'Dobrze! +' + (sec >= 10 ? 25 : 20) + ' XP' : (s.timedOut ? 'Czas minął' : 'Nie tym razem');
+    var fbSub = correctPick
+      ? 'Poprawna odpowiedź: ' + q.opts[q.a] + '.'
+      : 'Poprawna odpowiedź: ' + q.opts[q.a] + '. To pytanie wróci jutro w Powtórkach.';
+
+    var doneMsg = s.score === QUESTIONS.length
+      ? 'Komplet! Wszystkie ciekawostki z tej rundy trafiają do Twojej kolekcji.'
+      : 'Pytania z błędną odpowiedzią czekają w Powtórkach — wrócą jutro, potem za 3 i za 7 dni.';
+
+    return {
+      playing: !s.done,
+      done: s.done,
+      q: q,
+      qNum: s.i + 1,
+      qTotal: QUESTIONS.length,
+      timeStr: '0:' + (sec < 10 ? '0' + sec : String(sec)),
+      timerColor: sec <= 5 && !answered ? '#C2410C' : '#10162B',
+      segments: segments,
+      options: options,
+      answered: answered,
+      notAnswered: !answered,
+      fiftyUsed: s.fiftyUsed,
+      timeUsed: s.timeUsed,
+      fiftyLabel: s.fiftyUsed ? '50/50 użyte' : '50/50',
+      timeLabel: s.timeUsed ? '+10 s użyte' : '+10 s',
+      fiftyColor: s.fiftyUsed ? '#5B6478' : '#10162B',
+      timeColor: s.timeUsed ? '#5B6478' : '#10162B',
+      fbTitle: fbTitle,
+      fbSub: fbSub,
+      fbAccent: correctPick ? '#2F5BFF' : '#E8590C',
+      fbTitleColor: correctPick ? '#1F3FBF' : '#B13A08',
+      nextLabel: s.i >= QUESTIONS.length - 1 ? 'Zobacz wynik' : 'Dalej',
+      next: function () { self.next(); },
+      useFifty: function () { self.useFifty(); },
+      useTime: function () { self.useTime(); },
+      restart: function () { self.setState(freshState()); },
+      score: s.score,
+      xp: s.xp,
+      doneMsg: doneMsg
+    };
+  }
+}
+</script>
+</body>
+</html>
