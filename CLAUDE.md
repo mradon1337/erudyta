@@ -4,7 +4,7 @@ Quiz wiedzy ogólnej, który uczy (UI po polsku): po każdej odpowiedzi ciekawos
 w powtórkach, wynik można porównać ze znajomymi. React 19 + Vite 8 + TypeScript, CSS Modules, bez backendu
 w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna do 480 px.
 
-**Stan:** gotowy szkielet (Etap 0). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
+**Stan:** Etap 1 gotowy (logika gry w `src/lib/` z testami). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
 
 ## Dokumentacja (czytaj przed pracą nad danym obszarem)
 - `docs/PLAN.md` — etapy z zadaniami i warunkami „gotowe, gdy”. Źródło prawdy o tym, co robić teraz.

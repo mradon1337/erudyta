@@ -77,9 +77,12 @@ odpowiedz(stan, poprawnie, dziś, wPowtórce):
   // poprawna odpowiedź przed terminem, poza Powtórkami: bez zmian etapu
 ```
 
-- **Na dziś:** pytania z `box > 0` i `due <= dziś`, od najstarszego terminu, najwyżej 20 na rundę.
-- **Wykres 7 dni:** liczba pytań z `due` w danym dniu; zaległe doliczamy do „dziś”.
-- **Opanowanie kategorii:** `known` / liczba pytań kategorii w bazie.
+W kodzie: `answer(stan, poprawnie, dziś, wPowtórce)`.
+
+- **Na dziś** (`dueToday`, licznik `countDue`): pytania z `box > 0` i `due <= dziś`, od najstarszego terminu,
+  najwyżej 20 na rundę.
+- **Wykres 7 dni** (`weekForecast`): liczba pytań z `due` w danym dniu; zaległe doliczamy do „dziś”.
+- **Opanowanie kategorii** (`categoryMastery`): `known` / liczba pytań kategorii w bazie.
 
 ## Losowanie — `src/lib/rng.ts`, `src/lib/round.ts`
 - Generator: `mulberry32` z ziarnem liczonym z napisu funkcją skrótu (np. `cyrb53`). Żadnego `Math.random`
@@ -117,5 +120,16 @@ https://…/#w=d20261115&r=1101111011&n=Kasia&q=150
 
 ## XP, poziomy, seria — `src/lib/xp.ts`, `src/lib/streak.ts`
 Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
-`xpZaOdpowiedz(poprawnie, zostałoSekund, tryb)`, `poziom(xp) → { numer, nazwa, wPoziomie, doNastępnego }`,
-`zaliczDzień(streak, dziś) → streak`.
+`xpForAnswer(poprawnie, zostałoSekund | null, tryb)`, `levelFor(xp) → { number, name, inLevel, toNext }`,
+`completeDay(streak, dziś) → streak` (zaliczenie dnia) i `currentStreak(streak, dziś)` (seria do pokazania:
+0, gdy ostatni zaliczony dzień był przedwczoraj lub wcześniej).
+
+## Pozostałe moduły `src/lib/`
+- `dates.ts` — `toDay(Date)`, `addDays`, `daysBetween`, `isDay`.
+- `round.ts` — `buildRound({ mode, … }, { states, today, rand })`; `seededRound(ziarno)`; `refillQuick` dla
+  Szybkiej rundy po wyczerpaniu puli; `dailySeed`, `newChallengeSeed`.
+- `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
+- `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,
+  `saveProgress`, `clearProgress`, `browserStore()` (localStorage albo `null`).
+- `share.ts` — `buildChallengeUrl`, `parseChallenge(hash, liczbaPytań) → status 'none' | 'invalid' |
+  'bank-mismatch' | 'ok'`, `shareText`.

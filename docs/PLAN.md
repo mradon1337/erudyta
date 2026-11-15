@@ -11,15 +11,15 @@ z makietą, odhaczenie etapu poniżej, commit.
 - [x] Tokeny w `src/styles/theme.css`, baza 150 pytań z testami spójności.
 - [x] Makiety 10 ekranów w `design/project/`, dokumentacja w `docs/`.
 
-## Etap 1 — Logika gry (bez interfejsu)
+## Etap 1 — Logika gry (bez interfejsu) ✅
 Pliki w `src/lib/`, każdy z testem obok. Opis algorytmów: `DANE.md`.
-- [ ] `dates.ts` — dzień lokalny `YYYY-MM-DD`, dodawanie dni, różnica dni.
-- [ ] `rng.ts` — skrót napisu, `mulberry32`, tasowanie.
-- [ ] `reviews.ts` — `odpowiedz(...)`, lista „na dziś”, rozkład na 7 dni, opanowanie kategorii.
-- [ ] `xp.ts`, `streak.ts` — punkty, poziomy z nazwami, seria z rekordem.
-- [ ] `round.ts` — budowa rundy dla każdego trybu (z ziarnem i bez), tasowanie odpowiedzi.
-- [ ] `storage.ts` — wczytywanie i zapis postępu z obsługą błędów i wartościami domyślnymi.
-- [ ] `share.ts` — budowa i parsowanie linku z wyzwaniem.
+- [x] `dates.ts` — dzień lokalny `YYYY-MM-DD`, dodawanie dni, różnica dni.
+- [x] `rng.ts` — skrót napisu, `mulberry32`, tasowanie.
+- [x] `reviews.ts` — `answer(...)`, lista „na dziś”, rozkład na 7 dni, opanowanie kategorii.
+- [x] `xp.ts`, `streak.ts` — punkty, poziomy z nazwami, seria z rekordem.
+- [x] `round.ts` — budowa rundy dla każdego trybu (z ziarnem i bez), tasowanie odpowiedzi.
+- [x] `storage.ts` — wczytywanie i zapis postępu z obsługą błędów i wartościami domyślnymi.
+- [x] `share.ts` — budowa i parsowanie linku z wyzwaniem.
 
 **Gotowe, gdy:** testy pokrywają pełną ścieżkę powtórki (błąd → 1 → 3 → 7 → 14 dni → opanowane, oraz błąd
 w połowie), tę samą rundę dla tego samego ziarna, zerowanie serii po przerwie, odrzucenie zepsutego linku
