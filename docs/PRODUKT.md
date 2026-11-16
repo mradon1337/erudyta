@@ -74,7 +74,9 @@ Konta i synchronizacja między urządzeniami, powiadomienia, pojedynek na żywo,
 zgłaszanie błędów w pytaniach, ciemny motyw (przełącznik jest na makiecie Profilu, realizacja w Etapie 10).
 
 ## Treść
-- Start: 150 pytań, po 25 w każdej z 6 kategorii. Cel: 500+ (ścieżka „Więcej pytań” w `PLAN.md`).
+- Obecnie 200 pytań, 33–34 w każdej z 6 kategorii. Cel: 500+ (ścieżka „Więcej pytań” w `PLAN.md`).
+- Każde dopisanie pytań zmienia liczbę pytań w bazie, więc stare linki z wyzwaniami przestają działać
+  („inna wersja bazy pytań”), a Wyzwanie dnia losuje się z nowej puli. Dlatego dopisujemy paczkami, nie po jednym.
 - Każde pytanie: 1 poprawna i 3 wiarygodne błędne odpowiedzi tego samego rodzaju (rok obok roku, nazwisko obok
   nazwiska), ciekawostka do 170 znaków, która dodaje coś ponad samą odpowiedź.
 - Tylko fakty pewne i stabilne w czasie. Jeśli coś może się zmienić (rekordy, liczby), ciekawostka podaje rok

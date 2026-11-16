@@ -92,6 +92,7 @@ a zepsuty link pokazuje komunikat zamiast błędu.
 ## Równolegle — Więcej pytań
 Można robić w dowolnym momencie po Etapie 1, niezależnie od ekranów.
 - [ ] Rozbudowa bazy do 500+ pytań (ok. 85 na kategorię), w paczkach po 50 z przeglądem faktów.
+  - [x] Paczka 1 (h26–h33, g26–g33, n26–n34, s26–s33, p26–p33, j26–j34) — baza ma 200 pytań.
 - [ ] Rozważ podział bazy na pliki per kategoria i ładowanie leniwe, gdy plik przekroczy ok. 300 kB.
 
 ## Później (wymaga decyzji)
