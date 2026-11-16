@@ -1,5 +1,6 @@
-import { cleanName } from './progress.ts'
-import { ROUND_SIZE } from './round.ts'
+import { formatDay } from './dates.ts'
+import { cleanName, DEFAULT_NAME } from './progress.ts'
+import { dailySeed, ROUND_SIZE } from './round.ts'
 
 /** Wzorzec ziarna: 'd' + data (Wyzwanie dnia) albo 'c' + 6 znaków (własne wyzwanie). */
 export const SEED_RE = /^[dc][a-z0-9]{6,8}$/
@@ -66,4 +67,22 @@ export function shareText(title: string, results: readonly boolean[], url: strin
   const score = results.filter(Boolean).length
   const squares = results.map((r) => (r ? '🟦' : '🟧')).join('')
   return `Erudyta · ${title}\n${score}/${results.length}\n${squares}\n${url}`
+}
+
+/**
+ * Tekst udostępnienia wyniku Wyzwania dnia z linkiem, który pozwala znajomemu zagrać te same pytania.
+ * Domyślne imię („Ty”) nie trafia do linku — odbiorca zobaczy wtedy ogólny podpis.
+ */
+export function dailyShareText(
+  today: string,
+  results: readonly boolean[],
+  opts: { name: string; base: string; bankSize: number },
+): string {
+  const url = buildChallengeUrl(opts.base, {
+    seed: dailySeed(today),
+    results: [...results],
+    name: opts.name === DEFAULT_NAME ? '' : opts.name,
+    bankSize: opts.bankSize,
+  })
+  return shareText(`Wyzwanie dnia · ${formatDay(today)}`, results, url)
 }

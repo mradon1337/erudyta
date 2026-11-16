@@ -19,7 +19,8 @@ export interface RoundQuestion {
 export type RoundRequest =
   | { mode: 'daily' }
   | { mode: 'challenge'; seed: string }
-  | { mode: 'category'; category: CategoryId }
+  /** `noTimer` — wariant „Bez zegara” z ekranu ścieżki. */
+  | { mode: 'category'; category: CategoryId; noTimer?: boolean }
   | { mode: 'learn' }
   | { mode: 'quick' }
   | { mode: 'review' }

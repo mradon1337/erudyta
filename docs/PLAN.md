@@ -44,12 +44,13 @@ Makiety: `Wynik.dc.html`, `Awans.dc.html`.
 **Gotowe, gdy:** wynik zgadza się z przebiegiem rundy, XP i seria rosną zgodnie z `PRODUKT.md`, a runda bez błędów
 i runda z samymi błędami mają sensowne komunikaty.
 
-## Etap 4 — Start, ścieżki, tryby
+## Etap 4 — Start, ścieżki, tryby ✅
 Makiety: `Main.dc.html`, `Kategoria.dc.html`.
-- [ ] Ekran Start z prawdziwymi danymi; Wyzwanie dnia w stanie „do zagrania” i „rozegrane”.
-- [ ] Ekran ścieżki z kolekcją ciekawostek i pustymi stanami.
-- [ ] Tryby: Szybka runda (zegar 60 s, rekord), Nauka bez stresu.
-- [ ] Dolna nawigacja (`BottomNav`).
+- [x] Ekran Start z prawdziwymi danymi; Wyzwanie dnia w stanie „do zagrania” i „rozegrane”.
+- [x] Ekran ścieżki z kolekcją ciekawostek i pustymi stanami.
+- [x] Tryby: Szybka runda (zegar 60 s, rekord), Nauka bez stresu.
+- [x] Dolna nawigacja (`BottomNav`). Zakładki Powtórki, Ranking i Profil mają tymczasowy ekran do Etapów 5–7.
+- Kafel „Wyzwij znajomego” przeniesiony do Etapu 7 — bez linków byłby martwym przyciskiem.
 
 **Gotowe, gdy:** każdy kafel i tryb prowadzi do właściwej rundy, a procenty na Starcie zmieniają się po grze.
 
@@ -70,7 +71,8 @@ Makiety: `Onboard.dc.html`, `Profil.dc.html`.
 
 ## Etap 7 — Wyzwania przez link
 Makiety: `Wyzwanie.dc.html`, `Ranking.dc.html` (wariant MVP z `EKRANY.md` pkt 8).
-- [ ] „Udostępnij” po Wyzwaniu dnia i „Wyzwij znajomego” na Starcie (Web Share albo schowek).
+- [x] „Udostępnij” po Wyzwaniu dnia (na Wyniku i na Starcie; Web Share albo schowek).
+- [ ] Kafel „Wyzwij znajomego” w Trybach gry na Starcie.
 - [ ] Odczyt linku przy starcie, ekran wyzwania, porównanie na wyniku, +50 XP za wygraną.
 - [ ] Zakładka Ranking: historia wyzwań i rekordy.
 

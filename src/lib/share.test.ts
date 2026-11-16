@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildChallengeUrl, parseChallenge, shareText, type Challenge } from './share.ts'
+import { buildChallengeUrl, dailyShareText, parseChallenge, shareText, type Challenge } from './share.ts'
 
 const BASE = 'https://example.org/erudyta/'
 const R = [true, true, false, true, true, true, true, false, true, true]
@@ -77,5 +77,21 @@ describe('shareText', () => {
     expect(shareText('Wyzwanie dnia 15.11.2026', R, 'https://x/#w=1')).toBe(
       'Erudyta · Wyzwanie dnia 15.11.2026\n8/10\n🟦🟦🟧🟦🟦🟦🟦🟧🟦🟦\nhttps://x/#w=1',
     )
+  })
+})
+
+describe('dailyShareText', () => {
+  const results = [true, true, false, true, true, true, true, false, true, true]
+
+  it('tytuł z datą, link z ziarnem dnia i imieniem', () => {
+    const text = dailyShareText('2026-11-16', results, { name: 'Kasia', base: 'https://x.pl/', bankSize: 150 })
+    expect(text).toBe(
+      'Erudyta · Wyzwanie dnia · 16 listopada\n8/10\n🟦🟦🟧🟦🟦🟦🟦🟧🟦🟦\nhttps://x.pl/#w=d20261116&r=1101111011&n=Kasia&q=150',
+    )
+  })
+
+  it('domyślne imię nie trafia do linku', () => {
+    const text = dailyShareText('2026-11-16', results, { name: 'Ty', base: 'https://x.pl/', bankSize: 150 })
+    expect(text).not.toContain('n=')
   })
 })

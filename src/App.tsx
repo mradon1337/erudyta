@@ -1,28 +1,34 @@
 import { useState } from 'react'
-import { Button } from './components/Button.tsx'
-import { categoryName } from './data/categories.ts'
+import { BottomNav, type Tab } from './components/BottomNav.tsx'
+import { categoryName, type CategoryId } from './data/categories.ts'
 import { QUESTIONS } from './data/questions.ts'
-import { formatDay, toDay } from './lib/dates.ts'
-import { DEFAULT_NAME } from './lib/progress.ts'
+import { toDay } from './lib/dates.ts'
 import { countDue } from './lib/reviews.ts'
-import { dailySeed, type RoundRequest } from './lib/round.ts'
+import type { RoundRequest } from './lib/round.ts'
 import type { Session } from './lib/session.ts'
-import { buildChallengeUrl, shareText } from './lib/share.ts'
+import { dailyShareText } from './lib/share.ts'
 import { finishRound, leveledUp, levelsAfterExit, type RoundSummary } from './lib/summary.ts'
-import { levelFor, type Level } from './lib/xp.ts'
+import type { Level } from './lib/xp.ts'
 import { appUrl } from './platform/share.ts'
 import { useProgress } from './progress/useProgress.ts'
+import { CategoryScreen } from './screens/CategoryScreen.tsx'
+import { HomeScreen } from './screens/HomeScreen.tsx'
 import { LevelUpScreen } from './screens/LevelUpScreen.tsx'
+import { PlaceholderScreen } from './screens/PlaceholderScreen.tsx'
 import { ResultScreen } from './screens/ResultScreen.tsx'
 import { RoundScreen } from './screens/RoundScreen.tsx'
-import styles from './App.module.css'
+
+/** Ekran, do którego wracamy po rundzie (zakładka albo ścieżka wiedzy). */
+type Place = { name: 'tab'; tab: Tab } | { name: 'category'; category: CategoryId }
 
 /** Ekrany przełączane stanem (bez routera w MVP). */
 type Screen =
-  | { name: 'home' }
-  | { name: 'round'; request: RoundRequest; id: number }
-  | { name: 'result'; request: RoundRequest; summary: RoundSummary; today: string }
+  | Place
+  | { name: 'round'; request: RoundRequest; id: number; back: Place }
+  | { name: 'result'; request: RoundRequest; summary: RoundSummary; today: string; back: Place }
   | { name: 'levelUp'; level: Level; then: Screen }
+
+const HOME: Place = { name: 'tab', tab: 'home' }
 
 /** Napis na chipie ekranu Wynik. */
 function resultLabel(request: RoundRequest, summary: RoundSummary): string {
@@ -42,121 +48,109 @@ function resultLabel(request: RoundRequest, summary: RoundSummary): string {
   }
 }
 
-/**
- * Runda → Wynik → (Nowy poziom) → Start. Start jest na razie tymczasowy — właściwy powstaje w Etapie 4
- * (docs/PLAN.md).
- */
+/** Runda → Wynik → (Nowy poziom) → ekran, z którego zaczęto rundę. */
 export function App() {
   const { progress, updateProgress } = useProgress()
-  const [screen, setScreen] = useState<Screen>({ name: 'home' })
-  const play = (request: RoundRequest) => setScreen({ name: 'round', request, id: Date.now() })
-  const home: Screen = { name: 'home' }
+  const [screen, setScreen] = useState<Screen>(HOME)
+  const today = toDay(new Date())
+  const reviewsDue = countDue(progress.questions, today)
+
+  const play = (request: RoundRequest, back: Place) => setScreen({ name: 'round', request, id: Date.now(), back })
 
   /** Po wyniku albo przerwanej rundzie: najpierw ekran awansu, jeśli poziom wzrósł. */
   const leave = (levels: { levelBefore: Level; levelAfter: Level }, then: Screen) =>
     setScreen(leveledUp(levels) ? { name: 'levelUp', level: levels.levelAfter, then } : then)
 
-  if (screen.name === 'round') {
-    const { request } = screen
-    return (
-      <RoundScreen
-        key={screen.id}
-        request={request}
-        onFinish={(session: Session, today: string) => {
-          // Funkcja z updateProgress działa od razu na bieżącym postępie (także z ostatnią odpowiedzią).
-          const out: { summary?: RoundSummary } = {}
-          updateProgress((p) => {
-            const r = finishRound(p, session, today)
-            out.summary = r.summary
-            return r.progress
-          })
-          if (out.summary) setScreen({ name: 'result', request, summary: out.summary, today })
-        }}
-        onExit={(session: Session) => leave(levelsAfterExit(progress, session), home)}
-      />
-    )
-  }
+  switch (screen.name) {
+    case 'round': {
+      const { request, back } = screen
+      return (
+        <RoundScreen
+          key={screen.id}
+          request={request}
+          onFinish={(session: Session, day: string) => {
+            // Funkcja z updateProgress działa od razu na bieżącym postępie (także z ostatnią odpowiedzią).
+            const out: { summary?: RoundSummary } = {}
+            updateProgress((p) => {
+              const r = finishRound(p, session, day)
+              out.summary = r.summary
+              return r.progress
+            })
+            if (out.summary) setScreen({ name: 'result', request, summary: out.summary, today: day, back })
+          }}
+          onExit={(session: Session) => leave(levelsAfterExit(progress, session), back)}
+        />
+      )
+    }
 
-  if (screen.name === 'result') {
-    const { request, summary, today } = screen
-    const shareable = request.mode === 'daily' && summary.dailyResults !== null
-    const text =
-      shareable && summary.dailyResults
-        ? shareText(
-            `Wyzwanie dnia · ${formatDay(today)}`,
-            summary.dailyResults,
-            buildChallengeUrl(appUrl(), {
-              seed: dailySeed(today),
-              results: summary.dailyResults,
-              name: progress.name === DEFAULT_NAME ? '' : progress.name,
+    case 'result': {
+      const { request, summary, back } = screen
+      const text =
+        request.mode === 'daily' && summary.dailyResults
+          ? dailyShareText(screen.today, summary.dailyResults, {
+              name: progress.name,
+              base: appUrl(),
               bankSize: QUESTIONS.length,
-            }),
-          )
-        : null
-    const canReplay = request.mode !== 'review' || countDue(progress.questions, toDay(new Date())) > 0
-    return (
-      <ResultScreen
-        summary={summary}
-        label={resultLabel(request, summary)}
-        shareText={text}
-        onReplay={canReplay ? () => leave(summary, { name: 'round', request, id: Date.now() }) : null}
-        onDone={() => leave(summary, home)}
-      />
-    )
+            })
+          : null
+      const canReplay = request.mode !== 'review' || reviewsDue > 0
+      return (
+        <ResultScreen
+          summary={summary}
+          label={resultLabel(request, summary)}
+          shareText={text}
+          onReplay={canReplay ? () => leave(summary, { name: 'round', request, id: Date.now(), back }) : null}
+          onDone={() => leave(summary, back)}
+        />
+      )
+    }
+
+    case 'levelUp': {
+      const { then } = screen
+      // Nowa runda dostaje świeży klucz, żeby nie wznowić starej.
+      return (
+        <LevelUpScreen
+          level={screen.level}
+          onContinue={() => setScreen(then.name === 'round' ? { ...then, id: Date.now() } : then)}
+        />
+      )
+    }
+
+    case 'category': {
+      const place: Place = screen
+      return (
+        <CategoryScreen
+          key={screen.category}
+          category={screen.category}
+          onBack={() => setScreen(HOME)}
+          onPlay={(request) => play(request, place)}
+        />
+      )
+    }
+
+    case 'tab': {
+      const place: Place = screen
+      return (
+        <>
+          {screen.tab === 'home' && (
+            <HomeScreen
+              onPlay={(request) => play(request, place)}
+              onOpenCategory={(category) => setScreen({ name: 'category', category })}
+            />
+          )}
+          {screen.tab === 'reviews' && <PlaceholderScreen title="Powtórki" />}
+          {screen.tab === 'ranking' && <PlaceholderScreen title="Ranking" />}
+          {screen.tab === 'profile' && <PlaceholderScreen title="Profil" />}
+          <BottomNav
+            active={screen.tab}
+            reviewsDue={reviewsDue}
+            onSelect={(tab) => {
+              setScreen({ name: 'tab', tab })
+              window.scrollTo({ top: 0 })
+            }}
+          />
+        </>
+      )
+    }
   }
-
-  if (screen.name === 'levelUp') {
-    const { then } = screen
-    // Nowa runda dostaje świeży klucz, żeby nie wznowić starej.
-    return (
-      <LevelUpScreen
-        level={screen.level}
-        onContinue={() => setScreen(then.name === 'round' ? { ...then, id: Date.now() } : then)}
-      />
-    )
-  }
-
-  return <TemporaryHome onPlay={play} />
-}
-
-function TemporaryHome({ onPlay }: { onPlay: (request: RoundRequest) => void }) {
-  const { progress, persistent } = useProgress()
-  const level = levelFor(progress.xp)
-  const answered = Object.keys(progress.questions).length
-  const due = countDue(progress.questions, toDay(new Date()))
-
-  return (
-    <main className={styles.screen}>
-      <header className={styles.header}>
-        <span className={styles.hello}>Wersja robocza</span>
-        <h1 className={styles.logo}>Erudyta</h1>
-      </header>
-
-      {!persistent && (
-        <p className={styles.notice} role="status">
-          Ta przeglądarka nie pozwala zapisać postępu. Można grać, ale po zamknięciu karty wyniki znikną.
-        </p>
-      )}
-
-      <section className={styles.hero}>
-        <span className={styles.eyebrow}>Runda mieszana</span>
-        <h2 className={styles.heroTitle}>10 pytań, 20 sekund na każde</h2>
-        <p>
-          Poziom {level.number} · {level.name} · {progress.xp} XP
-        </p>
-        <div className={styles.actions}>
-          <Button variant="play" iconStart="play" onClick={() => onPlay({ mode: 'daily' })}>
-            Zagraj
-          </Button>
-          <Button variant="secondary" onClick={() => onPlay({ mode: 'learn' })}>
-            Bez zegara
-          </Button>
-        </div>
-      </section>
-
-      <p className={styles.stats}>
-        Odpowiedzi zapisane dla {answered} z {QUESTIONS.length} pytań · do powtórki dziś: {due}
-      </p>
-    </main>
-  )
 }

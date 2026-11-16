@@ -1,0 +1,219 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--space-5) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--space-6) + env(safe-area-inset-bottom));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.crumb {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/* Niebieska karta */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 22px var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.heroHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.heroIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.title {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.title:focus {
+  outline: none;
+}
+
+.mastery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.masteryHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.percent {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ofTotal {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.bar {
+  height: 10px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-strong);
+}
+
+.barFill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.counters {
+  display: grid;
+  /* Środkowy licznik ma najdłuższy podpis („w powtórkach”) — dostaje więcej miejsca. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-strong);
+}
+
+.counter dt {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.counter dd {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action {
+  flex: 1 1 0;
+  gap: 6px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-lg);
+  white-space: nowrap;
+}
+
+.action:first-child {
+  flex-grow: 1.35;
+}
+
+/* Kolekcja */
+.collection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.collectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.collectionTitle {
+  font-size: 18px;
+}
+
+.collectionCount {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fact {
+  display: flex;
+  gap: var(--space-3);
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.factLead {
+  flex-shrink: 0;
+  max-width: 38%;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-primary-strong);
+}
+
+.factText {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.locked {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 52px;
+  padding: var(--space-2) var(--space-4);
+  border: 2px dashed var(--color-border-strong);
+  border-radius: 18px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hint {
+  font-size: 14px;
+  color: var(--color-muted);
+}

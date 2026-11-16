@@ -134,6 +134,8 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
 - `summary.ts` — `finishRound(postęp, sesja, dziś) → { progress, summary }`: zaliczenie dnia serii, bonus i zapis
   Wyzwania dnia, rekord Szybkiej rundy, dane ekranu Wynik (błędy, ciekawostki, średni czas, poziom przed i po);
   `levelsAfterExit` dla przerwanej rundy, `roundComment` — komentarz wg wyniku.
+- `home.ts` — `greeting(godzina)`, `untilMidnight(teraz)`, `pathStats` (opanowane / w powtórkach / nowe, procent
+  w dół), `factCollection` (opanowane pytania kategorii od ostatnio opanowanych).
 - `plural.ts` — polska odmiana po liczebniku (`1 dzień`, `3 pytania`, `5 pytań`).
 - `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
 - `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,

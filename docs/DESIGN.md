@@ -122,6 +122,7 @@ cień `--shadow-sheet`. Zawiera: werdykt (22 / 700), poprawną odpowiedź, blok 
 ### Dolna nawigacja
 4 zakładki: Start, Powtórki, Ranking, Profil. Ikona 24 px nad podpisem 12 px. Aktywna: `primary` / 700 i
 `aria-current="page"`; nieaktywne: `muted` / 600. Nie pokazuj jej w trakcie rundy, na wyniku, powitaniu i awansie.
+Licznik powtórek na zakładce: pigułka 20 px, tło `accent`, tekst `ink` 12 / 700, biała obwódka 2 px.
 
 ### Pozostałe
 - **Chip**: pigułka, tło `primary-soft`, tekst `primary-strong` 13 / 700 (kategoria pytania, „Runda ukończona”).

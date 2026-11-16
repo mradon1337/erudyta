@@ -29,11 +29,13 @@ przycisk „Zaczynamy”, dopisek o braku konta.
 ## 2. Start — `Main.dc.html`
 **Zawiera, od góry:**
 1. Powitanie zależne od pory dnia + logo; pigułka serii („12 dni”, przy serii 0 — „Zacznij serię”).
-2. Karta **Wyzwanie dnia**: opis, przycisk „Graj”, czas do północy („kończy się za 7 h”).
-   Po rozegraniu: wynik „8/10” i przycisk „Udostępnij” zamiast „Graj”.
+2. Karta **Wyzwanie dnia**: opis, przycisk „Graj”, czas do północy („kończy się za 7 h”, w ostatniej godzinie
+   „za 40 min”). Po rozegraniu: „Twój wynik: 8/10”, przycisk „Udostępnij” zamiast „Graj” i „jutro nowe pytania”.
+   Powitanie: „Dzień dobry” (5:00–17:59), „Dobry wieczór” (pozostałe godziny).
 3. Karta poziomu: „Poziom 7 · Bystrzak”, pasek XP, ile brakuje do następnego.
 4. **Ścieżki wiedzy**: 6 kafli (2 kolumny) z procentem opanowania → ekran Ścieżka wiedzy.
-5. **Tryby gry**: Szybka runda (podpis z rekordem, gdy jest), Nauka bez stresu, Pojedynek
+5. **Tryby gry**: Szybka runda (podpis z rekordem, gdy jest), Nauka bez stresu („10 pytań bez zegara, w swoim
+   tempie” — baza nie ma dłuższych wyjaśnień, więc nie obiecujemy ich jak makieta), Pojedynek
    (w MVP: „Wyzwij znajomego” — tworzy link; podpis „5 pytań na żywo” wraca w Etapie 9).
 
 **Dodatkowo:** jeśli są powtórki na dziś, zakładka Powtórki ma licznik.
@@ -77,7 +79,10 @@ odpowiedzi), karta „Wraca do powtórki” (gdy były błędy), przyciski „Ud
 **Zawiera:** niebieska karta z nazwą, procentem opanowania i trzema licznikami (opanowane, w powtórkach, nowe);
 przyciski „Runda 10 pytań” i „Bez zegara”; **Kolekcja ciekawostek** — lista ciekawostek opanowanych pytań
 (od najnowszych) i przerywana ramka „9 ciekawostek czeka na odkrycie”.
-**Pusty stan:** brak opanowanych pytań → sama ramka „25 ciekawostek czeka na odkrycie”.
+**Karta ciekawostki:** z lewej poprawna odpowiedź (Space Grotesk, `primary-strong`), z prawej ciekawostka.
+**Pusty stan:** brak opanowanych pytań → sama ramka „25 ciekawostek czeka na odkrycie” i zdanie, jak pytanie
+trafia do kolekcji.
+**Po rundzie** ze ścieżki „Gotowe” wraca na ekran ścieżki, nie na Start.
 **Gdy opanowane 100%:** przycisk „Runda 10 pytań” zostaje (trening), a nad kolekcją chip „Ścieżka ukończona”.
 
 ## 7. Powtórki — `Powtorki.dc.html`

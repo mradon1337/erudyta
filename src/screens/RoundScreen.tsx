@@ -62,7 +62,8 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
     const now = Date.now()
     const today = toDay(new Date(now))
     const questions = buildRound(request, { states: progress.questions, today, rand: Math.random })
-    const timer = timerKindFor(request.mode, progress.settings.timer)
+    const noTimer = request.mode === 'category' && request.noTimer === true
+    const timer = timerKindFor(request.mode, progress.settings.timer && !noTimer)
     // Wynik Wyzwania dnia liczy się raz dziennie; kolejne podejścia to trening bez XP.
     const xp = !(request.mode === 'daily' && progress.daily[today] !== undefined)
     return { today, now, session: startSession(request.mode, questions, now, { timer, xp }) }

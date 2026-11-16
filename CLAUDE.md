@@ -4,7 +4,7 @@ Quiz wiedzy ogólnej, który uczy (UI po polsku): po każdej odpowiedzi ciekawos
 w powtórkach, wynik można porównać ze znajomymi. React 19 + Vite 8 + TypeScript, CSS Modules, bez backendu
 w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna do 480 px.
 
-**Stan:** Etapy 1–3 gotowe (logika gry w `src/lib/`, ekrany rundy, wyniku i awansu). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
+**Stan:** Etapy 1–4 gotowe (logika gry w `src/lib/`, Start, ścieżki, runda, wynik, awans, dolna nawigacja). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
 
 ## Dokumentacja (czytaj przed pracą nad danym obszarem)
 - `docs/PLAN.md` — etapy z zadaniami i warunkami „gotowe, gdy”. Źródło prawdy o tym, co robić teraz.
@@ -23,7 +23,7 @@ w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna
 - `src/data/questions.ts` — baza pytań (`a[0]` to zawsze poprawna odpowiedź; `id` jest stałe — nowe pytania dopisuj
   na końcu kategorii). `src/data/categories.ts` — 6 kategorii. `src/data/questions.test.ts` pilnuje spójności bazy.
 - `src/styles/theme.css` — tokeny (kolory, promienie, fonty, odstępy). `src/styles/global.css` — reset i baza.
-- `src/App.tsx` — przełącza ekrany stanem (Runda → Wynik → Nowy poziom); Start jest tymczasowy do Etapu 4.
+- `src/App.tsx` — przełącza ekrany stanem (zakładki, ścieżka, Runda → Wynik → Nowy poziom → powrót).
 - `src/platform/share.ts` — Web Share / schowek (jedyne miejsce z tymi API przeglądarki).
 - Docelowo (patrz `docs/PLAN.md`): `src/lib/` — logika bez Reacta (`rng`, `round`, `session`, `progress`, `reviews`,
   `xp`, `streak`, `share`, `storage`), `src/progress/` — kontekst postępu, `src/screens/`, `src/components/`.
