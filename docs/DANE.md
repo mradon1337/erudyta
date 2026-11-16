@@ -83,6 +83,7 @@ W kodzie: `answer(stan, poprawnie, dziś, wPowtórce)`.
   najwyżej 20 na rundę.
 - **Wykres 7 dni** (`weekForecast`): liczba pytań z `due` w danym dniu; zaległe doliczamy do „dziś”.
 - **Opanowanie kategorii** (`categoryMastery`): `known` / liczba pytań kategorii w bazie.
+- **Karty** (`reviewCards`): pytania z `box > 0` od najbliższego terminu; `dueLabel` → „na dziś” / „wraca jutro” / „za N dni”.
 
 ## Losowanie — `src/lib/rng.ts`, `src/lib/round.ts`
 - Generator: `mulberry32` z ziarnem liczonym z napisu funkcją skrótu (np. `cyrb53`). Żadnego `Math.random`

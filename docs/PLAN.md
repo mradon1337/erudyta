@@ -54,10 +54,10 @@ Makiety: `Main.dc.html`, `Kategoria.dc.html`.
 
 **Gotowe, gdy:** każdy kafel i tryb prowadzi do właściwej rundy, a procenty na Starcie zmieniają się po grze.
 
-## Etap 5 — Powtórki
+## Etap 5 — Powtórki ✅
 Makieta: `Powtorki.dc.html`.
-- [ ] Ekran z licznikiem na dziś, wykresem 7 dni, listą kart i pustymi stanami.
-- [ ] Runda w trybie powtórek (bez zegara, 10 XP, etap na chipie), licznik na zakładce.
+- [x] Ekran z licznikiem na dziś, wykresem 7 dni, listą kart i pustymi stanami.
+- [x] Runda w trybie powtórek (bez zegara, 10 XP, etap na chipie), licznik na zakładce.
 
 **Gotowe, gdy:** błąd z dzisiejszej rundy widać w kartach z terminem „jutro”, a po przestawieniu daty systemowej
 pytanie pojawia się w „Na dziś” i po poprawnej odpowiedzi przechodzi na „za 3 dni”.

@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import type { Question } from '../data/questions.ts'
+import { QUESTIONS, type Question } from '../data/questions.ts'
 import { addDays } from './dates.ts'
 import {
   answer,
   categoryMastery,
   countDue,
+  dueLabel,
   dueToday,
   nextDueAfter,
+  reviewCards,
   weekForecast,
   type QuestionState,
 } from './reviews.ts'
@@ -127,5 +129,46 @@ describe('categoryMastery', () => {
       h99: state({ box: 0, due: null, known: true }), // usunięte z bazy
     }
     expect(categoryMastery(states, 'historia', miniBank)).toEqual({ known: 1, total: 3 })
+  })
+})
+
+describe('karty w powtórkach', () => {
+  const [a, b, c, d] = QUESTIONS as [Question, Question, Question, Question]
+  const lookup = new Map([a, b, c, d].map((q) => [q.id, q]))
+
+  it('tylko pytania w powtórkach i w bazie, od najbliższego terminu', () => {
+    const states = {
+      [a.id]: state({ box: 2, due: addDays(D0, 3) }),
+      [b.id]: state({ box: 1, due: addDays(D0, -2) }),
+      [c.id]: state({ box: 0, due: null, known: true }),
+      [d.id]: state({ box: 1, due: addDays(D0, 1) }),
+      gone: state({ box: 1, due: D0 }),
+    }
+    const cards = reviewCards(states, D0, lookup)
+    expect(cards.map((x) => [x.question.id, x.inDays])).toEqual([
+      [b.id, -2],
+      [d.id, 1],
+      [a.id, 3],
+    ])
+  })
+
+  it('termin słowami', () => {
+    expect(dueLabel(-3)).toBe('na dziś')
+    expect(dueLabel(0)).toBe('na dziś')
+    expect(dueLabel(1)).toBe('wraca jutro')
+    expect(dueLabel(3)).toBe('za 3 dni')
+    expect(dueLabel(14)).toBe('za 14 dni')
+  })
+
+  it('ścieżka z „Gotowe, gdy” Etapu 5: błąd dziś → jutro; jutro poprawnie w powtórce → za 3 dni', () => {
+    let s = answer(undefined, false, D0, false)
+    const lookupA = new Map([[a.id, a]])
+    expect(reviewCards({ [a.id]: s }, D0, lookupA)[0]?.inDays).toBe(1)
+    const tomorrow = addDays(D0, 1)
+    expect(dueToday({ [a.id]: s }, tomorrow, lookupA)).toEqual([a.id])
+    s = answer(s, true, tomorrow, true)
+    const card = reviewCards({ [a.id]: s }, tomorrow, lookupA)[0]
+    expect(card).toMatchObject({ box: 2, inDays: 3 })
+    expect(dueLabel(card?.inDays ?? 0)).toBe('za 3 dni')
   })
 })

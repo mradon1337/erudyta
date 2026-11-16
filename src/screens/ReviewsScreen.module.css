@@ -1,0 +1,254 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--space-6) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--nav-height) + var(--space-5) + env(safe-area-inset-bottom));
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-ink-2);
+}
+
+/* Karta „Na dziś” */
+.today {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 18px var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.today > button {
+  flex-shrink: 0;
+  min-height: 50px;
+  padding: 0 var(--space-5);
+  font-size: 15px;
+}
+
+/* Wyłączony „Zacznij” na niebieskiej karcie: bez wypełnienia, przygaszony. */
+.today > button:disabled {
+  border: 2px solid var(--color-primary-chart);
+  background: transparent;
+  color: var(--color-primary-chart);
+}
+
+.today :focus-visible {
+  outline-color: var(--color-surface);
+}
+
+.todayText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.todayCount {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.todayDone {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.todayHint {
+  font-size: 13px;
+}
+
+/* Wykres tygodnia */
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.weekHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.weekTitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.weekTotal {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+  gap: var(--space-2);
+  height: 120px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  height: 100%;
+}
+
+.colCount {
+  font-size: 12px;
+  color: var(--color-ink-2);
+}
+
+.colBar {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  background: var(--color-primary-chart);
+}
+
+.colDay {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.now .colCount,
+.now .colDay {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.now .colBar {
+  background: var(--color-primary);
+}
+
+/* Karty */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardsTitle {
+  font-size: 18px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 14px var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.cardQ {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.cardWhen {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.stage {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-1);
+}
+
+.dash {
+  width: 18px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+}
+
+.dashBad {
+  background: var(--color-accent-mid);
+}
+
+.dashGood {
+  background: var(--color-primary);
+}
+
+/* Pusty stan */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.emptyTitle {
+  font-size: 20px;
+}
+
+.emptyText {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-ink-2);
+}

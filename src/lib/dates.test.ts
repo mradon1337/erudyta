@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, daysBetween, formatDay, isDay, toDay } from './dates.ts'
+import { addDays, daysBetween, formatDay, isDay, toDay, weekdayShort } from './dates.ts'
 
 describe('dates', () => {
   it('toDay bierze dzień lokalny, nie UTC', () => {
@@ -50,5 +50,13 @@ describe('formatDay', () => {
     expect(formatDay('2026-11-16')).toBe('16 listopada')
     expect(formatDay('2026-01-01')).toBe('1 stycznia')
     expect(formatDay('2026-09-30')).toBe('30 września')
+  })
+})
+
+describe('weekdayShort', () => {
+  it('skróty dni tygodnia', () => {
+    expect(weekdayShort('2026-11-16')).toBe('Pn')
+    expect(weekdayShort('2026-11-21')).toBe('So')
+    expect(weekdayShort('2026-11-22')).toBe('Nd')
   })
 })

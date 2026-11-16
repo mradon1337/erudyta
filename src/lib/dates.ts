@@ -71,3 +71,10 @@ export function formatDay(day: string): string {
   const d = new Date(ms)
   return `${d.getUTCDate()} ${MONTHS_GENITIVE[d.getUTCMonth()]}`
 }
+
+const WEEKDAYS_SHORT = ['Nd', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'] as const
+
+/** Skrót dnia tygodnia, np. „Pn” (oś wykresu powtórek). */
+export function weekdayShort(day: string): string {
+  return WEEKDAYS_SHORT[new Date(utcOrThrow(day)).getUTCDay()] ?? ''
+}

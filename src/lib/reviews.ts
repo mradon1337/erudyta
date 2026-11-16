@@ -124,3 +124,35 @@ export function categoryMastery(states: States, category: CategoryId, bank: read
   }
   return { known, total }
 }
+
+export interface ReviewCard {
+  question: Question
+  box: Exclude<Box, 0>
+  due: string
+  /** Dni do terminu; 0 i mniej = na dziś (zaległe też). */
+  inDays: number
+}
+
+/** Karty w powtórkach („Twoje karty”): od najbliższego terminu, potem po etapie i `id`. */
+export function reviewCards(
+  states: States,
+  today: string,
+  bank: ReadonlyMap<string, Question> = QUESTION_BY_ID,
+): ReviewCard[] {
+  const cards: ReviewCard[] = []
+  for (const [id, s] of Object.entries(states)) {
+    const question = bank.get(id)
+    if (!question || s.box === 0 || s.due === null) continue
+    cards.push({ question, box: s.box, due: s.due, inDays: daysBetween(today, s.due) })
+  }
+  return cards.sort((a, b) =>
+    a.due !== b.due ? (a.due < b.due ? -1 : 1) : a.box - b.box || (a.question.id < b.question.id ? -1 : 1),
+  )
+}
+
+/** Termin karty słowami: „na dziś”, „wraca jutro”, „za 3 dni”. */
+export function dueLabel(inDays: number): string {
+  if (inDays <= 0) return 'na dziś'
+  if (inDays === 1) return 'wraca jutro'
+  return `za ${inDays} dni`
+}

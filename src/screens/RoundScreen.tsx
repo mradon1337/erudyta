@@ -66,7 +66,9 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
     const timer = timerKindFor(request.mode, progress.settings.timer && !noTimer)
     // Wynik Wyzwania dnia liczy się raz dziennie; kolejne podejścia to trening bez XP.
     const xp = !(request.mode === 'daily' && progress.daily[today] !== undefined)
-    return { today, now, session: startSession(request.mode, questions, now, { timer, xp }) }
+    // Etap powtórki z chwili startu rundy — chip pokazuje go także po odpowiedzi, która go zmienia.
+    const boxes = new Map(questions.map((q) => [q.question.id, progress.questions[q.question.id]?.box ?? 0]))
+    return { today, now, boxes, session: startSession(request.mode, questions, now, { timer, xp }) }
   })
   const [session, setSession] = useState(setup.session)
   const [now, setNow] = useState(setup.now)
@@ -169,7 +171,12 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
       </p>
 
       <div className={styles.question}>
-        <Chip>{categoryName(q.question.cat)}</Chip>
+        <Chip>
+          {categoryName(q.question.cat)}
+          {session.mode === 'review' && (setup.boxes.get(q.question.id) ?? 0) > 0
+            ? ` · Etap ${setup.boxes.get(q.question.id)} z 4`
+            : ''}
+        </Chip>
         <h1 ref={questionRef} tabIndex={-1} className={styles.questionText}>
           {q.question.q}
         </h1>

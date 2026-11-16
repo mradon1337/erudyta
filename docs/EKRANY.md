@@ -89,7 +89,8 @@ trafia do kolekcji.
 **Zawiera:** tytuł i jedno zdanie wyjaśnienia; karta „Na dziś: 8 pytań” z przyciskiem „Zacznij”;
 wykres słupkowy na 7 dni (dziś wyróżnione kolorem i pogrubieniem, liczba nad każdym słupkiem);
 „Twoje karty” — pytania w powtórkach z kategorią, terminem („wraca jutro”, „za 3 dni”) i etapem (4 kreski).
-**Puste stany:** nic na dziś → „Na dziś wszystko powtórzone” i termin najbliższej powtórki, przycisk nieaktywny;
+**Puste stany:** nic na dziś → „Na dziś: Wszystko powtórzone” i termin najbliższej powtórki, przycisk nieaktywny
+(bez wypełnienia, obrys `primary-chart`);
 nic w powtórkach → krótkie wyjaśnienie, skąd biorą się powtórki, i przycisk „Zagraj rundę”.
 
 ## 8. Ranking — `Ranking.dc.html`

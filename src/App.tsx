@@ -16,6 +16,7 @@ import { HomeScreen } from './screens/HomeScreen.tsx'
 import { LevelUpScreen } from './screens/LevelUpScreen.tsx'
 import { PlaceholderScreen } from './screens/PlaceholderScreen.tsx'
 import { ResultScreen } from './screens/ResultScreen.tsx'
+import { ReviewsScreen } from './screens/ReviewsScreen.tsx'
 import { RoundScreen } from './screens/RoundScreen.tsx'
 
 /** Ekran, do którego wracamy po rundzie (zakładka albo ścieżka wiedzy). */
@@ -138,7 +139,7 @@ export function App() {
               onOpenCategory={(category) => setScreen({ name: 'category', category })}
             />
           )}
-          {screen.tab === 'reviews' && <PlaceholderScreen title="Powtórki" />}
+          {screen.tab === 'reviews' && <ReviewsScreen onPlay={(request) => play(request, place)} />}
           {screen.tab === 'ranking' && <PlaceholderScreen title="Ranking" />}
           {screen.tab === 'profile' && <PlaceholderScreen title="Profil" />}
           <BottomNav
