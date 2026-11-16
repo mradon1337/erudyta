@@ -49,3 +49,25 @@ export function addDays(day: string, n: number): string {
 export function daysBetween(from: string, to: string): number {
   return Math.round((utcOrThrow(to) - utcOrThrow(from)) / MS_PER_DAY)
 }
+
+const MONTHS_GENITIVE = [
+  'stycznia',
+  'lutego',
+  'marca',
+  'kwietnia',
+  'maja',
+  'czerwca',
+  'lipca',
+  'sierpnia',
+  'września',
+  'października',
+  'listopada',
+  'grudnia',
+] as const
+
+/** Dzień po polsku, np. „16 listopada”. */
+export function formatDay(day: string): string {
+  const ms = utcOrThrow(day)
+  const d = new Date(ms)
+  return `${d.getUTCDate()} ${MONTHS_GENITIVE[d.getUTCMonth()]}`
+}

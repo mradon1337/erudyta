@@ -1,0 +1,280 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--space-5) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--space-6) + env(safe-area-inset-bottom));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.header > span:not(.spacer) {
+  align-self: center;
+  padding: 6px 14px;
+  text-align: center;
+}
+
+.spacer {
+  flex-shrink: 0;
+  width: var(--tap-min);
+}
+
+/* Ciemna karta z pierścieniem */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+.ring {
+  position: relative;
+  flex-shrink: 0;
+  width: 112px;
+  height: 112px;
+}
+
+.ring svg {
+  display: block;
+}
+
+.ringTrack,
+.ringFill {
+  fill: none;
+  stroke-width: 12;
+}
+
+.ringTrack {
+  stroke: var(--color-ink-track);
+}
+
+.ringFill {
+  stroke: var(--color-accent);
+  stroke-linecap: round;
+  animation: ring 700ms ease-out both;
+}
+
+@keyframes ring {
+  from {
+    stroke-dashoffset: 302;
+  }
+}
+
+.score {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.comment {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.comment:focus {
+  outline: none;
+}
+
+.heroSub {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Trzy statystyki */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  padding: 14px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.statValue {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.blue {
+  color: var(--color-primary-strong);
+}
+
+.orange {
+  color: var(--color-accent-text);
+}
+
+/* Ciekawostki */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+}
+
+.facts,
+.mistakes {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts {
+  gap: 10px;
+}
+
+.fact {
+  display: flex;
+  gap: var(--space-3);
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.bulb {
+  flex-shrink: 0;
+  color: var(--color-accent-strong);
+}
+
+/* Karta „Wraca do powtórki” */
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-4);
+  border-radius: 18px;
+  background: var(--color-accent-soft);
+}
+
+.reviewHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reviewLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+}
+
+.reviewWhen {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent-deep);
+}
+
+.mistakes {
+  gap: var(--space-3);
+}
+
+.mistake {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.mistakeQ {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.mistakeA {
+  font-size: 14px;
+  color: var(--color-ink-2);
+}
+
+.more {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent-deep);
+}
+
+.clean {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: 18px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.check {
+  flex-shrink: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  padding-top: var(--space-1);
+}
+
+.action {
+  flex: 1 1 0;
+  padding: 0 var(--space-3);
+  font-size: 15px;
+}
+
+.shareStatus {
+  min-height: 1.45em;
+  margin-top: calc(-1 * var(--space-2));
+  font-size: 14px;
+  text-align: center;
+  color: var(--color-ink-2);
+}

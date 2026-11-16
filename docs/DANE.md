@@ -125,11 +125,16 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
 0, gdy ostatni zaliczony dzień był przedwczoraj lub wcześniej).
 
 ## Pozostałe moduły `src/lib/`
-- `dates.ts` — `toDay(Date)`, `addDays`, `daysBetween`, `isDay`.
+- `dates.ts` — `toDay(Date)`, `addDays`, `daysBetween`, `isDay`, `formatDay` („16 listopada”).
 - `round.ts` — `buildRound({ mode, … }, { states, today, rand })`; `seededRound(ziarno)`; `refillQuick` dla
   Szybkiej rundy po wyczerpaniu puli; `dailySeed`, `newChallengeSeed`.
 - `session.ts` — przebieg rundy jako czyste funkcje: `startSession`, `pick`, `tick`, `fiftyFifty`, `addTime`,
-  `next`; zegar liczony z przekazanego `now` (`deadline` gdy tyka, `remainingMs` gdy stoi).
+  `next`; zegar liczony z przekazanego `now` (`deadline` gdy tyka, `remainingMs` gdy stoi). Dziennik `log`
+  (wybrana odpowiedź i czas od pokazania pytania) zasila ekran Wynik; `xp: false` przy starcie = trening bez XP.
+- `summary.ts` — `finishRound(postęp, sesja, dziś) → { progress, summary }`: zaliczenie dnia serii, bonus i zapis
+  Wyzwania dnia, rekord Szybkiej rundy, dane ekranu Wynik (błędy, ciekawostki, średni czas, poziom przed i po);
+  `levelsAfterExit` dla przerwanej rundy, `roundComment` — komentarz wg wyniku.
+- `plural.ts` — polska odmiana po liczebniku (`1 dzień`, `3 pytania`, `5 pytań`).
 - `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
 - `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,
   `saveProgress`, `clearProgress`, `browserStore()` (localStorage albo `null`).

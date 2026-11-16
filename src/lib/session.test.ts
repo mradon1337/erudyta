@@ -182,3 +182,23 @@ describe('Szybka runda', () => {
     expect(s.questions).toHaveLength(3)
   })
 })
+
+describe('dziennik odpowiedzi i trening', () => {
+  it('zapisuje wybór i czas od pokazania pytania', () => {
+    let s = startSession('daily', questions(3), T0)
+    const wrong = wrongOf(s)
+    s = pick(s, wrong, T0 + 3_000)
+    s = next(s, T0 + 10_000)
+    s = tick(s, T0 + 10_000 + 20_000)
+    expect(s.log).toEqual([
+      { picked: wrong, ms: 3_000 },
+      { picked: null, ms: 20_000 },
+    ])
+  })
+
+  it('runda bez XP (trening) liczy wyniki, ale nie punkty', () => {
+    let s = startSession('daily', questions(2), T0, { xp: false })
+    s = pick(s, correctOf(s), T0 + 1_000)
+    expect(s).toMatchObject({ results: [true], xp: 0, lastXp: 0 })
+  })
+})

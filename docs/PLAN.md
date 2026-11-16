@@ -36,10 +36,10 @@ Makieta: `Quiz.dc.html`. Opis: `EKRANY.md` pkt 3.
 **Gotowe, gdy:** da się przejść 10 pytań myszą i samą klawiaturą; upływ czasu działa jak błąd; odświeżenie strony
 w trakcie rundy nie gubi zapisanych odpowiedzi; wszystkie 4 stany odpowiedzi wyglądają jak na makiecie.
 
-## Etap 3 — Wynik i nowy poziom
+## Etap 3 — Wynik i nowy poziom ✅
 Makiety: `Wynik.dc.html`, `Awans.dc.html`.
-- [ ] Ekran wyniku z wariantami z `EKRANY.md` pkt 4, zaliczenie dnia serii, bonus za Wyzwanie dnia.
-- [ ] Ekran nowego poziomu pokazywany po wyniku, gdy poziom wzrósł.
+- [x] Ekran wyniku z wariantami z `EKRANY.md` pkt 4, zaliczenie dnia serii, bonus za Wyzwanie dnia.
+- [x] Ekran nowego poziomu pokazywany po wyniku, gdy poziom wzrósł.
 
 **Gotowe, gdy:** wynik zgadza się z przebiegiem rundy, XP i seria rosną zgodnie z `PRODUKT.md`, a runda bez błędów
 i runda z samymi błędami mają sensowne komunikaty.

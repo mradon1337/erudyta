@@ -16,6 +16,12 @@ export const WARN_SECONDS = 5
 /** Zegar na każde pytanie, jeden zegar na całą rundę (Szybka runda) albo brak zegara. */
 export type TimerKind = 'question' | 'total' | 'none'
 
+/** Jedna udzielona odpowiedź: wybrany indeks (`null` = czas minął) i czas od pokazania pytania. */
+export interface AnswerLog {
+  picked: number | null
+  ms: number
+}
+
 export interface Session {
   mode: Mode
   questions: RoundQuestion[]
@@ -40,6 +46,12 @@ export interface Session {
   xp: number
   /** XP za ostatnią odpowiedź. */
   lastXp: number
+  /** Czy odpowiedzi dają XP (`false` — trening, np. drugie podejście do Wyzwania dnia). */
+  xpEnabled: boolean
+  /** Chwila pokazania bieżącego pytania. */
+  shownAt: number
+  /** Dziennik odpowiedzi, równoległy do `results`. */
+  log: AnswerLog[]
   finished: boolean
 }
 
@@ -59,7 +71,7 @@ export function startSession(
   mode: Mode,
   questions: RoundQuestion[],
   now: number,
-  opts: { timer?: TimerKind } = {},
+  opts: { timer?: TimerKind; xp?: boolean } = {},
 ): Session {
   const timer = opts.timer ?? timerKindFor(mode, true)
   const remainingMs = fullTime(timer)
@@ -79,6 +91,9 @@ export function startSession(
     results: [],
     xp: 0,
     lastXp: 0,
+    xpEnabled: opts.xp ?? true,
+    shownAt: now,
+    log: [],
     finished: questions.length === 0,
   }
 }
@@ -116,12 +131,13 @@ export function pick(s: Session, answerIndex: number, now: number): Session {
   if (s.timer !== 'none' && msLeft(s, now) === 0) return tick(s, now)
 
   const correct = answerIndex === q.correct
-  const gained = xpForAnswer(correct, s.timer === 'question' ? secondsLeft(s, now) : null, s.mode)
+  const gained = s.xpEnabled ? xpForAnswer(correct, s.timer === 'question' ? secondsLeft(s, now) : null, s.mode) : 0
   return {
     ...s,
     ...pause(s, now),
     picked: answerIndex,
     results: [...s.results, correct],
+    log: [...s.log, { picked: answerIndex, ms: Math.max(0, now - s.shownAt) }],
     xp: s.xp + gained,
     lastXp: gained,
   }
@@ -134,7 +150,15 @@ export function tick(s: Session, now: number): Session {
     // Koniec Szybkiej rundy: pytanie bez odpowiedzi się nie liczy.
     return { ...s, deadline: null, remainingMs: 0, finished: true }
   }
-  return { ...s, deadline: null, remainingMs: 0, timedOut: true, results: [...s.results, false], lastXp: 0 }
+  return {
+    ...s,
+    deadline: null,
+    remainingMs: 0,
+    timedOut: true,
+    results: [...s.results, false],
+    log: [...s.log, { picked: null, ms: Math.max(0, now - s.shownAt) }],
+    lastXp: 0,
+  }
 }
 
 /** Joker 50/50: chowa dwie losowe błędne odpowiedzi. */
@@ -171,6 +195,7 @@ export function next(s: Session, now: number, refill?: () => RoundQuestion[]): S
     timedOut: false,
     hidden: [],
     lastXp: 0,
+    shownAt: now,
     remainingMs,
     deadline: running ? now + remainingMs : null,
     finished: s.timer === 'total' && remainingMs === 0,

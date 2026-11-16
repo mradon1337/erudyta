@@ -30,6 +30,14 @@ const SHAPES = {
       <path d="M12 9v4M10 2h4" />
     </>
   ),
+  share: (
+    <>
+      <circle cx="18" cy="5" r="2.5" />
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="19" r="2.5" />
+      <path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4" />
+    </>
+  ),
   play: <path d="M7 4l13 8-13 8z" fill="currentColor" stroke="none" />,
 } satisfies Record<string, ReactNode>
 

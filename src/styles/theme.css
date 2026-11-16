@@ -11,7 +11,8 @@
 
   /* Tekst */
   --color-ink: #10162b; /* tekst główny, ciemne przyciski */
-  --color-ink-2: #3a4256; /* tekst pomocniczy na jasnym tle */
+  --color-ink-2: #3a4256;
+  --color-ink-track: #2a3352; /* tło pierścienia wyniku na ciemnej karcie */ /* tekst pomocniczy na jasnym tle */
   --color-muted: #5b6478; /* podpisy, nieaktywne zakładki (min. 4,5:1 na bieli) */
 
   /* Linie */

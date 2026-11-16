@@ -14,6 +14,7 @@ Wartości w kodzie biorą się wyłącznie z `src/styles/theme.css`.
 | `--color-surface` | `#FFFFFF` | karty, dolna nawigacja, panel po odpowiedzi |
 | `--color-track` | `#E6E9F0` | tło pasków postępu, tło przełącznika zakładek |
 | `--color-ink` | `#10162B` | tekst główny; tło ciemnych przycisków i kart |
+| `--color-ink-track` | `#2A3352` | tło pierścienia wyniku na ciemnej karcie (`ink`) |
 | `--color-ink-2` | `#3A4256` | tekst pomocniczy w dłuższych opisach |
 | `--color-muted` | `#5B6478` | podpisy, nieaktywne zakładki, odpowiedzi „wyszarzone” |
 | `--color-border` | `#DDE2EC` | ramki kart (1 px) i odpowiedzi (2 px) |

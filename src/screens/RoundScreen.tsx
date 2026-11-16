@@ -34,8 +34,8 @@ const TICK_MS = 200
 
 interface Props {
   request: RoundRequest
-  /** Runda dobiegła końca (ostatnie „Zobacz wynik” albo koniec czasu Szybkiej rundy). */
-  onFinish: (session: Session) => void
+  /** Runda dobiegła końca (ostatnie „Zobacz wynik” albo koniec czasu Szybkiej rundy). `today` — dzień startu rundy. */
+  onFinish: (session: Session, today: string) => void
   /** Gracz przerwał rundę. Odpowiedzi i XP są już zapisane. */
   onExit: (session: Session) => void
 }
@@ -63,7 +63,9 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
     const today = toDay(new Date(now))
     const questions = buildRound(request, { states: progress.questions, today, rand: Math.random })
     const timer = timerKindFor(request.mode, progress.settings.timer)
-    return { today, now, session: startSession(request.mode, questions, now, { timer }) }
+    // Wynik Wyzwania dnia liczy się raz dziennie; kolejne podejścia to trening bez XP.
+    const xp = !(request.mode === 'daily' && progress.daily[today] !== undefined)
+    return { today, now, session: startSession(request.mode, questions, now, { timer, xp }) }
   })
   const [session, setSession] = useState(setup.session)
   const [now, setNow] = useState(setup.now)
@@ -92,7 +94,7 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
           )
         }
       }
-      if (nextState.finished && !prev.finished) onFinish(nextState)
+      if (nextState.finished && !prev.finished) onFinish(nextState, today)
     },
     [today, updateProgress, onFinish],
   )

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, daysBetween, isDay, toDay } from './dates.ts'
+import { addDays, daysBetween, formatDay, isDay, toDay } from './dates.ts'
 
 describe('dates', () => {
   it('toDay bierze dzień lokalny, nie UTC', () => {
@@ -34,5 +34,21 @@ describe('dates', () => {
   it('addDays i daysBetween rzucają przy złej dacie', () => {
     expect(() => addDays('bzdura', 1)).toThrow()
     expect(() => daysBetween('2026-11-15', '2026-13-01')).toThrow()
+  })
+})
+
+describe('formatDay', () => {
+  it('dzień i miesiąc w dopełniaczu', () => {
+    expect(formatDay('2026-11-16')).toBe('16 listopada')
+    expect(formatDay('2026-01-01')).toBe('1 stycznia')
+    expect(formatDay('2026-09-30')).toBe('30 września')
+  })
+})
+
+describe('formatDay', () => {
+  it('dzień i miesiąc w dopełniaczu', () => {
+    expect(formatDay('2026-11-16')).toBe('16 listopada')
+    expect(formatDay('2026-01-01')).toBe('1 stycznia')
+    expect(formatDay('2026-09-30')).toBe('30 września')
   })
 })

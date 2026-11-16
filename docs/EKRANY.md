@@ -62,6 +62,12 @@ odpowiedzi), karta „Wraca do powtórki” (gdy były błędy), przyciski „Ud
   nie ma danych o innych graczach.
 - „Udostępnij” widać po Wyzwaniu dnia i wyzwaniu z linku; w pozostałych trybach zastępuje je „Zagraj jeszcze raz”.
 - Bez błędów: zamiast karty powtórki — „Wszystko dobrze. Nic nie trafia do powtórek.”
+- Karta powtórki wypisuje do 3 pytań („Twoja odpowiedź: … · poprawna: …” albo „Czas minął · …”), resztę
+  streszcza „i jeszcze N pytań”.
+- Szybka runda: w pierścieniu sama liczba poprawnych, komentarz „Nowy rekord!”, gdy padł rekord.
+- Drugie podejście do Wyzwania dnia: chip „Wyzwanie dnia · trening”, bez XP; „Udostępnij” wysyła pierwszy wynik dnia.
+- X i „Gotowe” prowadzą na Start, a gdy poziom wzrósł — najpierw na Nowy poziom (także przed „Zagraj jeszcze raz”
+  i po przerwanej rundzie, która podniosła poziom).
 
 ## 5. Nowy poziom — `Awans.dc.html`
 **Kiedy:** po ekranie Wynik, jeśli runda podniosła poziom.
