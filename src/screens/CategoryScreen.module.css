@@ -217,3 +217,42 @@
   font-size: 14px;
   color: var(--color-muted);
 }
+
+/* Komputer: karta i przyciski po lewej, kolekcja ciekawostek po prawej */
+@media (min-width: 1024px) {
+  .screen {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      'header header'
+      'hero collection'
+      'actions collection'
+      '. collection';
+    align-content: start;
+    gap: var(--space-6) 32px;
+    max-width: var(--wide-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .header {
+    grid-area: header;
+  }
+
+  .hero {
+    grid-area: hero;
+    padding: 28px;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+
+  .collection {
+    grid-area: collection;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+}

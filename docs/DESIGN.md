@@ -65,7 +65,18 @@ Najmniejszy tekst to 12 px (11 px tylko w osi wykresu).
 - Margines boczny ekranu 20 px; odstęp między sekcjami 18–20 px; wewnątrz kart 10–14 px. Siatka 4 px.
 - Dolna nawigacja ma 80 px i jest przyklejona do dołu; treść dostaje `padding-bottom: 100px`.
 - Uwzględnij bezpieczne obszary telefonu: `env(safe-area-inset-*)`.
-- Na komputerze ta sama kolumna na tle `bg` — bez osobnego układu w MVP.
+- Telefon i tablet (do 1023 px): kolumna do 480 px, dolna nawigacja.
+- **Komputer (od 1024 px)** — progi są wpisane w `@media` ekranów, tokeny szerokości w `theme.css`:
+  - dolna nawigacja staje się **boczną** (`--sidebar-width` 248 px, biała, ramka z prawej, logo u góry;
+    zakładki 48 px w poziomie: ikona + podpis 15 px; aktywna na tle `primary-soft`, tekst `primary-strong`);
+  - zakładki i ścieżka do `--wide-max-width` (1040 px), wynik i ranking do `--mid-max-width` (800 px),
+    marginesy 40 px;
+  - **Start**: Wyzwanie dnia (2/3) obok karty poziomu (1/3), ścieżki po 3 w rzędzie, tryby gry po 3 w rzędzie
+    od 1280 px (węziej jeden pod drugim);
+  - **Powtórki**: „Na dziś” obok wykresu, karty w 2 kolumnach. **Profil**: 4 statystyki w rzędzie, kategorie obok
+    ustawień. **Ścieżka**: karta i przyciski po lewej, kolekcja po prawej. **Wynik**: ciekawostki obok karty powtórki;
+  - ekrany skupienia (runda, powitanie, wyzwanie, nowy poziom) zostają kolumną, `--app-max-width` rośnie do 560 px;
+    powitanie jest białą kartą na środku, „Nowy poziom” ma niebieskie tło na całą szerokość okna.
 
 ## Promienie
 10 plakietka litery · 12 kafelek ikony · 14 przycisk ikonowy i „Graj” · 16 przyciski i odpowiedzi · 18–20 karty ·

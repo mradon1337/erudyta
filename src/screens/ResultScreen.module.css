@@ -278,3 +278,58 @@
   text-align: center;
   color: var(--color-ink-2);
 }
+
+/* Komputer: ciekawostki obok karty powtórki */
+@media (min-width: 1024px) {
+  .screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    gap: var(--space-6);
+    max-width: var(--mid-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .screen > * {
+    grid-column: 1 / -1;
+  }
+
+  .hero {
+    padding: 28px;
+  }
+
+  .comment {
+    font-size: 30px;
+  }
+
+  .heroSub {
+    font-size: 16px;
+  }
+
+  .stats {
+    gap: var(--space-4);
+  }
+
+  .screen > .section {
+    grid-column: 1;
+  }
+
+  .screen > .review,
+  .screen > .clean {
+    grid-column: 2;
+    align-self: start;
+    margin-top: 38px;
+  }
+
+  /* Bez ciekawostek karta powtórki zajmuje całą szerokość. */
+  .screen > .review:nth-child(4),
+  .screen > .clean:nth-child(4) {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .actions {
+    justify-self: end;
+    width: min(100%, 420px);
+  }
+}

@@ -1,0 +1,6 @@
+/* Komputer: zakładki odsuwają się od bocznej nawigacji. */
+@media (min-width: 1024px) {
+  .withNav {
+    padding-left: var(--sidebar-width);
+  }
+}

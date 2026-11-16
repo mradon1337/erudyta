@@ -252,3 +252,46 @@
   line-height: 1.45;
   color: var(--color-ink-2);
 }
+
+/* Komputer: „Na dziś” obok wykresu, karty w dwóch kolumnach */
+@media (min-width: 1024px) {
+  .screen {
+    max-width: var(--wide-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    gap: var(--space-6);
+  }
+
+  .screen > * {
+    grid-column: 1 / -1;
+  }
+
+  .header {
+    max-width: 640px;
+  }
+
+  .screen > .today {
+    grid-column: 1;
+    align-self: stretch;
+    padding: 28px;
+  }
+
+  .screen > .week {
+    grid-column: 2;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .empty {
+    max-width: 640px;
+  }
+}

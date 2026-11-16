@@ -155,3 +155,22 @@
   text-align: center;
   color: var(--color-muted);
 }
+
+/* Komputer: zwarta karta na środku zamiast układu na całą wysokość telefonu */
+@media (min-width: 1024px) {
+  .screen {
+    display: flex;
+    align-items: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .form {
+    width: 100%;
+    min-height: 0;
+    padding: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    background: var(--color-surface);
+  }
+}

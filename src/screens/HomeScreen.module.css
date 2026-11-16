@@ -329,3 +329,59 @@
   flex-shrink: 0;
   color: var(--color-muted);
 }
+
+/* Komputer: Wyzwanie dnia obok poziomu, ścieżki i tryby po trzy w rzędzie */
+@media (min-width: 1024px) {
+  .screen {
+    max-width: var(--wide-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .screen {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    gap: var(--space-6);
+  }
+
+  .screen > * {
+    grid-column: 1 / -1;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .screen > .daily {
+    grid-column: span 2;
+    padding: 28px;
+  }
+
+  .screen > .level {
+    grid-column: span 1;
+    justify-content: center;
+  }
+
+  .paths {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3) var(--space-4);
+  }
+
+  .section > h2,
+  .section > ul {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Wąski komputer: tryby gry jeden pod drugim (trzy w rzędzie się nie mieszczą). */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

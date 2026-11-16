@@ -57,7 +57,21 @@
   /* Wymiary */
   --tap-min: 44px; /* najmniejszy cel dotyku */
   --nav-height: 80px;
-  --app-max-width: 480px;
+  --app-max-width: 480px; /* kolumna ekranów; na komputerze ekrany skupienia (runda, powitanie) */
+  --wide-max-width: 1040px; /* komputer: zakładki i ścieżka */
+  --mid-max-width: 800px; /* komputer: wynik, ranking */
+  --sidebar-width: 248px; /* komputer: boczna nawigacja */
 
   --shadow-sheet: 0 -10px 30px rgb(16 22 43 / 10%);
+}
+
+/*
+ * Komputer (od 1024 px): dolna nawigacja staje się boczną, zakładki dostają szerszy układ.
+ * Próg 1024 px jest wpisany w media queries ekranów — zmienna CSS nie działa w @media.
+ */
+@media (min-width: 1024px) {
+  :root {
+    --app-max-width: 560px;
+    --nav-height: 0px;
+  }
 }

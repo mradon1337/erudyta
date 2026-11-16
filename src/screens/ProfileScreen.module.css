@@ -232,3 +232,44 @@
 .reset:hover {
   background: var(--color-accent-soft);
 }
+
+/* Komputer: statystyki w jednym rzędzie, kategorie obok ustawień */
+@media (min-width: 1024px) {
+  .screen {
+    max-width: var(--wide-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-content: start;
+    gap: var(--space-6);
+  }
+
+  .screen > * {
+    grid-column: 1 / -1;
+  }
+
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .screen > .box:not(.settings) {
+    grid-column: 1;
+  }
+
+  .screen > .settings {
+    grid-column: 2;
+    align-self: start;
+  }
+
+  .screen > .reset {
+    justify-self: start;
+  }
+
+  .cats {
+    grid-template-columns: 140px minmax(0, 1fr) 44px;
+  }
+}

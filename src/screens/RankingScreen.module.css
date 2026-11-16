@@ -231,3 +231,14 @@
 .dayNone {
   color: var(--color-muted);
 }
+
+@media (min-width: 1024px) {
+  .screen {
+    max-width: var(--mid-max-width);
+    padding: 40px 40px 48px;
+  }
+
+  .toggle {
+    max-width: 400px;
+  }
+}

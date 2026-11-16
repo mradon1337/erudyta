@@ -17,10 +17,15 @@ interface Props {
   onSelect: (tab: Tab) => void
 }
 
-/** Dolna nawigacja: tylko na ekranach Start, Powtórki, Ranking, Profil. */
+/** Dolna nawigacja (na komputerze — boczna): tylko na ekranach Start, Powtórki, Ranking, Profil. */
 export function BottomNav({ active, reviewsDue, onSelect }: Props) {
   return (
     <nav className={styles.nav} aria-label="Główna nawigacja">
+      {/* Logo widać tylko w bocznej nawigacji na komputerze. */}
+      <span className={styles.brand} aria-hidden="true">
+        <span className={styles.mark}>E</span>
+        Erudyta
+      </span>
       {TABS.map((tab) => (
         <button
           key={tab.id}

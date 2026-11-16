@@ -221,3 +221,11 @@
   font-size: 14px;
   text-align: center;
 }
+
+/* Szerzej niż telefon: niebieskie tło na całą szerokość okna, treść dalej w kolumnie. */
+@media (min-width: 481px) {
+  .screen {
+    box-shadow: 0 0 0 100vmax var(--color-primary);
+    clip-path: inset(0 -100vmax);
+  }
+}

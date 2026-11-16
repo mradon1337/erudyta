@@ -23,6 +23,7 @@ import { RankingScreen } from './screens/RankingScreen.tsx'
 import { ResultScreen } from './screens/ResultScreen.tsx'
 import { ReviewsScreen } from './screens/ReviewsScreen.tsx'
 import { RoundScreen } from './screens/RoundScreen.tsx'
+import styles from './App.module.css'
 
 /** Ekran, do którego wracamy po rundzie (zakładka albo ścieżka wiedzy). */
 type Place = { name: 'tab'; tab: Tab } | { name: 'category'; category: CategoryId }
@@ -185,7 +186,7 @@ export function App() {
     case 'tab': {
       const place: Place = screen
       return (
-        <>
+        <div className={styles.withNav}>
           {screen.tab === 'home' && (
             <HomeScreen
               onPlay={(request) => play(request, place)}
@@ -204,7 +205,7 @@ export function App() {
               window.scrollTo({ top: 0 })
             }}
           />
-        </>
+        </div>
       )
     }
   }

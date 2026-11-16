@@ -1,4 +1,4 @@
-# Ekrany
+﻿# Ekrany
 
 Każdy ekran ma makietę w `design/project/`. Liczby i imiona na makietach to dane przykładowe.
 Zasady gry: `PRODUKT.md`. Wygląd komponentów: `DESIGN.md`. Dane: `DANE.md`.
@@ -15,7 +15,7 @@ Powitanie ──► Start ──► Runda ──► Wynik ──► (Nowy poziom
 Link z wyzwaniem ──► Wyzwanie od znajomego ──► Runda ──► Wynik (z porównaniem)
 ```
 
-Dolna nawigacja (Start, Powtórki, Ranking, Profil) jest widoczna tylko na tych czterech ekranach.
+Dolna nawigacja (Start, Powtórki, Ranking, Profil) jest widoczna tylko na tych czterech ekranach. Na komputerze (od 1024 px) jest boczna, a ekrany mają szerszy układ — szczegóły w `DESIGN.md`, „Układ”.
 
 ---
 

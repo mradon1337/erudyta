@@ -65,3 +65,13 @@
   color: var(--color-muted);
   cursor: default;
 }
+
+@media (min-width: 1024px) {
+  .screen {
+    padding-top: 40px;
+  }
+
+  .questionText {
+    font-size: 28px;
+  }
+}
