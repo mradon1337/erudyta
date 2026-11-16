@@ -1,0 +1,46 @@
+.notice {
+  position: fixed;
+  top: calc(var(--space-3) + env(safe-area-inset-top));
+  right: var(--space-3);
+  left: var(--space-3);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: calc(var(--app-max-width) - 2 * var(--space-3));
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-size: 14px;
+}
+
+.text {
+  flex-grow: 1;
+}
+
+.reload,
+.later {
+  flex-shrink: 0;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.reload {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.later {
+  background: transparent;
+  color: var(--color-surface);
+}
+
+.notice :focus-visible {
+  outline-color: var(--color-surface);
+}

@@ -80,9 +80,12 @@ Makiety: `Wyzwanie.dc.html`, `Ranking.dc.html` (wariant MVP z `EKRANY.md` pkt 8)
 a zepsuty link pokazuje komunikat zamiast błędu.
 
 ## Etap 8 — Aplikacja na telefon (PWA) i publikacja
-- [ ] `manifest.webmanifest`, ikony 192 i 512 px (także maskowalna), `theme-color`.
-- [ ] Service worker: pliki aplikacji z pamięci podręcznej, działanie offline, odświeżanie po nowej wersji.
-- [ ] Publikacja jako strona statyczna (np. GitHub Pages; `base: './'` jest już ustawione).
+- [x] `manifest.webmanifest`, ikony 192 i 512 px (także maskowalna), `theme-color`.
+- [x] Service worker: pliki aplikacji z pamięci podręcznej, działanie offline, odświeżanie po nowej wersji.
+- [ ] Publikacja jako strona statyczna: workflow `.github/workflows/pages.yml` jest gotowy; potrzebny push do `main`
+  i w ustawieniach repozytorium Settings → Pages → Source: „GitHub Actions”.
+- Sprawdzone w Chrome (headless, `npm run preview`): brak błędów instalowalności, start i cała runda bez sieci,
+  pasek „Jest nowa wersja” po podmianie `sw.js`. Do sprawdzenia na prawdziwym telefonie po publikacji.
 
 **Gotowe, gdy:** aplikację da się dodać do ekranu głównego telefonu i rozegrać rundę w trybie samolotowym.
 

@@ -4,7 +4,7 @@ Quiz wiedzy ogólnej, który uczy (UI po polsku): po każdej odpowiedzi ciekawos
 w powtórkach, wynik można porównać ze znajomymi. React 19 + Vite 8 + TypeScript, CSS Modules, bez backendu
 w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna do 480 px.
 
-**Stan:** Etapy 1–7 gotowe (cała gra bez serwera; zostaje PWA i publikacja — Etap 8). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
+**Stan:** Etapy 1–8 gotowe poza samą publikacją (workflow Pages czeka na push i włączenie Pages w repo). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
 
 ## Dokumentacja (czytaj przed pracą nad danym obszarem)
 - `docs/PLAN.md` — etapy z zadaniami i warunkami „gotowe, gdy”. Źródło prawdy o tym, co robić teraz.
@@ -16,7 +16,7 @@ w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna
 
 ## Komendy
 - Po każdej zmianie: `npx tsc -b && npx eslint . && npm test`; build: `npm run build`.
-- Dev: `npm run dev` (port 5299, `strictPort`). Podgląd builda: `npm run preview`.
+- Dev: `npm run dev` (port 5299, `strictPort`). Podgląd builda: `npm run preview` (port 5300; tu działa service worker).
 - Testy: Vitest (`vitest.config.ts`), pliki `src/**/*.test.ts`.
 
 ## Mapa

@@ -149,3 +149,13 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
   `saveProgress`, `clearProgress`, `browserStore()` (localStorage albo `null`).
 - `share.ts` — `buildChallengeUrl`, `parseChallenge(hash, liczbaPytań) → status 'none' | 'invalid' |
   'bank-mismatch' | 'ok'`, `shareText`.
+
+## Aplikacja offline (PWA)
+- `public/manifest.webmanifest` + ikony w `public/icons/` (192 i 512 px, także `maskable`; logo w bezpiecznej strefie).
+- `build/serviceWorker.ts` — plugin Vite, który przy `npm run build` tworzy `dist/sw.js` z listą plików aplikacji
+  (bez fontów cyrylicy, greki i wietnamskich — te dociągają się w razie potrzeby) i wersją ze skrótu ich treści.
+- Strategia: pliki z pamięci podręcznej (cache first); nawigacja najpierw z sieci, bez sieci — z pamięci.
+- Nowa wersja instaluje się w tle i od razu przejmuje stronę (`skipWaiting`, `clients.claim`), stara pamięć jest
+  usuwana. Aplikacja pokazuje pasek „Jest nowa wersja aplikacji” z „Odśwież” / „Później” — bez samoczynnego
+  przeładowania, bo gracz może być w trakcie rundy (`src/components/UpdateNotice.tsx`, `src/platform/serviceWorker.ts`).
+- W `npm run dev` service worker się nie rejestruje.
