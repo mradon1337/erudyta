@@ -101,6 +101,7 @@ nic w powtórkach → krótkie wyjaśnienie, skąd biorą się powtórki, i przy
 - *Wyzwania*: lista rozegranych wyzwań z linków (imię, wynik znajomego, Twój wynik, kto wygrał) i przycisk
   „Wyzwij znajomego”; pusty stan zachęca do wysłania pierwszego linku;
 - *Rekordy*: najlepsza Szybka runda, najdłuższa seria, wyniki Wyzwań dnia z ostatnich 7 dni.
+- Wiersz wygranego wyzwania: tło `primary-soft`, ramka `primary`; wynik „Ty : znajomy”, np. „9 : 8”.
 
 ## 9. Wyzwanie od znajomego — `Wyzwanie.dc.html`
 **Kiedy:** aplikację otwarto z linku z `#w=…` (format w `DANE.md`).
@@ -108,6 +109,15 @@ nic w powtórkach → krótkie wyjaśnienie, skąd biorą się powtórki, i przy
 (10 pytań, 20 s, +50 XP za wygraną), „Podejmij wyzwanie”, „Nie teraz”.
 **Błędy:** link uszkodzony albo z innej wersji bazy pytań → komunikat „Tego wyzwania nie da się już rozegrać”
 i przycisk „Na start”. Własny link (to samo ziarno już rozegrane) → od razu porównanie, bez ponownej gry.
+**Już rozegrane:** „To wyzwanie już rozegrane”, werdykt („Wygrana: 9 do 8”), dwa rzędy kratek (nadawca i Ty).
+Za rozegrane uznajemy ziarno z historii wyzwań albo Wyzwanie dnia z tej daty.
+**Bez imienia w linku:** „Masz wyzwanie od znajomego”, awatar „?”.
+**Link wklejony w otwartej karcie** (zmiana samego `#`) też otwiera ten ekran.
+
+**Wyzwij znajomego** (Start, Ranking): runda 10 pytań z nowym ziarnem `c…`; na Wyniku „Udostępnij” wysyła link
+z własnym wynikiem. W historii takie wyzwanie ma podpis „Twoje wyzwanie · link do wysłania znajomym”.
+Po wyzwaniu z linku Wynik pokazuje „Lepiej niż Kasia: 9 do 8. +50 XP za wygraną.” / „Remis: 8 do 8.” /
+„Kasia tym razem lepiej: 9 do 8.”, a „Udostępnij” odsyła link z własnym wynikiem.
 
 ## 10. Profil — `Profil.dc.html`
 **Zawiera:** karta z inicjałem, imieniem, poziomem i przyciskiem „Zmień”; 4 statystyki (odpowiedzi łącznie,

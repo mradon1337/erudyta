@@ -18,6 +18,8 @@ import styles from './HomeScreen.module.css'
 interface Props {
   onPlay: (request: RoundRequest) => void
   onOpenCategory: (category: CategoryId) => void
+  /** „Wyzwij znajomego”: runda z nowym ziarnem, po niej link do wysłania. */
+  onNewChallenge: () => void
 }
 
 function ModeRow(props: { icon: IconName; title: string; subtitle: string; onClick: () => void }) {
@@ -35,7 +37,7 @@ function ModeRow(props: { icon: IconName; title: string; subtitle: string; onCli
   )
 }
 
-export function HomeScreen({ onPlay, onOpenCategory }: Props) {
+export function HomeScreen({ onPlay, onOpenCategory, onNewChallenge }: Props) {
   const { progress, persistent } = useProgress()
   const [shareMessage, setShareMessage] = useState('')
   const now = new Date()
@@ -191,6 +193,12 @@ export function HomeScreen({ onPlay, onOpenCategory }: Props) {
           title="Nauka bez stresu"
           subtitle="10 pytań bez zegara, w swoim tempie"
           onClick={() => onPlay({ mode: 'learn' })}
+        />
+        <ModeRow
+          icon="users"
+          title="Wyzwij znajomego"
+          subtitle="Zagraj 10 pytań i wyślij link"
+          onClick={onNewChallenge}
         />
       </section>
     </main>

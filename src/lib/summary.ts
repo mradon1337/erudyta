@@ -1,3 +1,4 @@
+import { outcome, recordChallenge, type ChallengeInfo, type Outcome } from './challenges.ts'
 import { pruneDaily, type Progress } from './progress.ts'
 import type { Mode } from './round.ts'
 import type { Session } from './session.ts'
@@ -18,6 +19,8 @@ export interface Mistake {
 
 export interface RoundSummary {
   mode: Mode
+  /** Wyniki kolejnych odpowiedzi w tej rundzie. */
+  results: boolean[]
   correct: number
   /** Liczba udzielonych odpowiedzi (w Szybkiej rundzie zależy od tempa). */
   total: number
@@ -25,6 +28,10 @@ export interface RoundSummary {
   xp: number
   /** Bonus za ukończenie Wyzwania dnia (0, gdy nie należał się). */
   dailyBonus: number
+  /** Bonus za wygrane wyzwanie z linku (0 albo `XP.challengeWin`). */
+  challengeBonus: number
+  /** Wyzwanie z linku: z kim i jak poszło (`outcome: null` — własne wyzwanie, bez porównania). */
+  challenge: (ChallengeInfo & { outcome: Outcome | null }) | null
   /** Drugie i kolejne podejście do Wyzwania dnia — bez XP, wynik dnia bez zmian. */
   training: boolean
   /** Zapisany wynik Wyzwania dnia (przy treningu — ten pierwszy). */
@@ -56,6 +63,7 @@ export function finishRound(
   progress: Progress,
   session: Session,
   today: string,
+  opts: { challenge?: ChallengeInfo } = {},
 ): { progress: Progress; summary: RoundSummary } {
   const correct = session.results.filter(Boolean).length
   const xpBefore = Math.max(0, progress.xp - session.xp)
@@ -63,7 +71,21 @@ export function finishRound(
 
   const isDaily = session.mode === 'daily' && !training
   const dailyBonus = isDaily ? XP.dailyBonus : 0
-  const xpAfter = progress.xp + dailyBonus
+
+  const info = session.mode === 'challenge' ? (opts.challenge ?? null) : null
+  const result = info ? outcome(session.results, info.theirs) : null
+  const challengeBonus = result === 'win' ? XP.challengeWin : 0
+  const challenges = info
+    ? recordChallenge(progress.challenges, {
+        seed: info.seed,
+        from: info.from,
+        theirs: info.theirs,
+        mine: session.results,
+        date: today,
+      })
+    : progress.challenges
+
+  const xpAfter = progress.xp + dailyBonus + challengeBonus
   const daily = isDaily
     ? pruneDaily({ ...progress.daily, [today]: { results: session.results, xp: session.xp + dailyBonus } }, today)
     : progress.daily
@@ -71,7 +93,7 @@ export function finishRound(
   const streak = completeDay(progress.streak, today)
   const bestQuick = session.mode === 'quick' ? Math.max(progress.bestQuick, correct) : progress.bestQuick
 
-  const next: Progress = { ...progress, xp: xpAfter, daily, streak, bestQuick }
+  const next: Progress = { ...progress, xp: xpAfter, daily, streak, bestQuick, challenges }
 
   const answered = session.log
     .map((entry, i) => ({ entry, q: session.questions[i], ok: session.results[i] === true }))
@@ -99,10 +121,13 @@ export function finishRound(
     progress: next,
     summary: {
       mode: session.mode,
+      results: session.results,
       correct,
       total: session.results.length,
-      xp: session.xp + dailyBonus,
+      xp: session.xp + dailyBonus + challengeBonus,
       dailyBonus,
+      challengeBonus,
+      challenge: info ? { ...info, outcome: result } : null,
       training,
       dailyResults: daily[today]?.results ?? null,
       streak: streak.count,

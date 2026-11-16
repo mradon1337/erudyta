@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.square {
+  height: 26px;
+  border-radius: 7px;
+}
+
+.good {
+  background: var(--color-primary);
+}
+
+.bad {
+  background: var(--color-accent-mid);
+}

@@ -78,11 +78,21 @@ export function dailyShareText(
   results: readonly boolean[],
   opts: { name: string; base: string; bankSize: number },
 ): string {
+  return seedShareText(`Wyzwanie dnia · ${formatDay(today)}`, dailySeed(today), results, opts)
+}
+
+/** Tekst udostępnienia wyzwania o dowolnym ziarnie (np. „Wyzwij znajomego” albo odpowiedź na wyzwanie). */
+export function seedShareText(
+  title: string,
+  seed: string,
+  results: readonly boolean[],
+  opts: { name: string; base: string; bankSize: number },
+): string {
   const url = buildChallengeUrl(opts.base, {
-    seed: dailySeed(today),
+    seed,
     results: [...results],
     name: opts.name === DEFAULT_NAME ? '' : opts.name,
     bankSize: opts.bankSize,
   })
-  return shareText(`Wyzwanie dnia · ${formatDay(today)}`, results, url)
+  return shareText(title, results, url)
 }

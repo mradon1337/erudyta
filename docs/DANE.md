@@ -114,7 +114,10 @@ https://…/#w=d20261115&r=1101111011&n=Kasia&q=150
 - Parsowanie przez `URLSearchParams`; wszystko z linku to **niezaufane dane**: sprawdź wzorce (`w`: `^[dc][a-z0-9]{6,8}$`,
   `r`: `^[01]{10}$`), przytnij imię, wyświetlaj wyłącznie jako tekst (React domyślnie escapuje — nie używaj
   `dangerouslySetInnerHTML`).
-- Po wczytaniu wyzwania usuń `#…` z adresu (`history.replaceState`), żeby odświeżenie nie otwierało go ponownie.
+- Po wczytaniu wyzwania usuń `#…` z adresu (`history.replaceState`), żeby odświeżenie nie otwierało go ponownie
+  (`takeChallengeFromUrl` w `src/platform/share.ts`).
+- Link z Wyzwaniem dnia (ziarno `d…`) rozgrywa się jako wyzwanie: nie zalicza Wyzwania dnia, ale jeśli Wyzwanie dnia
+  z tej daty już rozegrano, ekran od razu pokazuje porównanie.
 - Udostępnianie: `navigator.share`, a gdy go nie ma — kopiowanie do schowka z potwierdzeniem „Skopiowano link”.
 - Tekst udostępnienia: nazwa trybu z datą, wynik, rząd kratek 🟦/🟧 i link. Emoji wolno użyć tylko tutaj, w tekście
   wysyłanym na zewnątrz — nie w interfejsie.
@@ -138,6 +141,8 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
 - `home.ts` — `greeting(godzina)`, `untilMidnight(teraz)`, `pathStats` (opanowane / w powtórkach / nowe, procent
   w dół), `factCollection` (opanowane pytania kategorii od ostatnio opanowanych).
 - `profile.ts` — `profileStats` (odpowiedzi, skuteczność, opanowane, skuteczność w kategoriach malejąco), `initial`.
+- `challenges.ts` — `outcome` (wygrana / remis / przegrana), `playedResults` (czy ziarno już rozegrane),
+  `recordChallenge` (historia bez duplikatów, maks. 50). `finishRound(…, { challenge })` zapisuje wyzwanie i +50 XP.
 - `plural.ts` — polska odmiana po liczebniku (`1 dzień`, `3 pytania`, `5 pytań`).
 - `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
 - `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,

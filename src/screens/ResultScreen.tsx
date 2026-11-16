@@ -36,6 +36,15 @@ function subtitle(s: RoundSummary): string {
     const answers = count(s.correct, ['poprawna odpowiedź', 'poprawne odpowiedzi', 'poprawnych odpowiedzi'])
     return s.newRecord ? `${answers} w 60 sekund.` : `${answers} w 60 sekund. Rekord: ${s.bestQuick}.`
   }
+  if (s.challenge) {
+    const { from, theirs, outcome } = s.challenge
+    const name = from || 'Znajomy'
+    const theirScore = theirs.filter(Boolean).length
+    if (outcome === 'win') return `Lepiej niż ${name}: ${s.correct} do ${theirScore}. +${s.challengeBonus} XP za wygraną.`
+    if (outcome === 'draw') return `Remis: ${s.correct} do ${theirScore}.`
+    if (outcome === 'lose') return `${name} tym razem lepiej: ${theirScore} do ${s.correct}.`
+    return `${s.correct} z 10. Wyślij link — znajomi zagrają te same pytania.`
+  }
   if (s.training) {
     const daily = s.dailyResults ? ` (${s.dailyResults.filter(Boolean).length}/${s.dailyResults.length})` : ''
     return `Trening: wynik dnia${daily} był już zapisany, więc ta runda nie daje XP.`

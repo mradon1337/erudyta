@@ -69,12 +69,12 @@ Makiety: `Onboard.dc.html`, `Profil.dc.html`.
 
 **Gotowe, gdy:** nowy użytkownik trafia na Powitanie, a po wyczyszczeniu postępu aplikacja wraca do stanu początkowego.
 
-## Etap 7 — Wyzwania przez link
+## Etap 7 — Wyzwania przez link ✅
 Makiety: `Wyzwanie.dc.html`, `Ranking.dc.html` (wariant MVP z `EKRANY.md` pkt 8).
 - [x] „Udostępnij” po Wyzwaniu dnia (na Wyniku i na Starcie; Web Share albo schowek).
-- [ ] Kafel „Wyzwij znajomego” w Trybach gry na Starcie.
-- [ ] Odczyt linku przy starcie, ekran wyzwania, porównanie na wyniku, +50 XP za wygraną.
-- [ ] Zakładka Ranking: historia wyzwań i rekordy.
+- [x] Kafel „Wyzwij znajomego” w Trybach gry na Starcie (i przycisk „Wyzwij” w Rankingu).
+- [x] Odczyt linku przy starcie, ekran wyzwania, porównanie na wyniku, +50 XP za wygraną.
+- [x] Zakładka Ranking: historia wyzwań i rekordy.
 
 **Gotowe, gdy:** link otwarty w drugiej przeglądarce (okno prywatne) daje te same 10 pytań w tej samej kolejności,
 a zepsuty link pokazuje komunikat zamiast błędu.
