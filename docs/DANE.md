@@ -137,6 +137,7 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
   `levelsAfterExit` dla przerwanej rundy, `roundComment` — komentarz wg wyniku.
 - `home.ts` — `greeting(godzina)`, `untilMidnight(teraz)`, `pathStats` (opanowane / w powtórkach / nowe, procent
   w dół), `factCollection` (opanowane pytania kategorii od ostatnio opanowanych).
+- `profile.ts` — `profileStats` (odpowiedzi, skuteczność, opanowane, skuteczność w kategoriach malejąco), `initial`.
 - `plural.ts` — polska odmiana po liczebniku (`1 dzień`, `3 pytania`, `5 pytań`).
 - `progress.ts` — typy postępu, `createProgress`, `applyAnswer`, `pruneDaily`, `cleanName`.
 - `storage.ts` — `loadProgress(store) → { progress, status: 'ok' | 'new' | 'corrupt' | 'unavailable' }`,

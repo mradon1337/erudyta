@@ -117,4 +117,7 @@ pomarańczowa); ustawienia: Dźwięki, Zegar w rundach, Ciemny motyw; „Wyczyś
 - „Zegar w rundach” wyłączony zamienia rundy ścieżek na wariant bez zegara; nie dotyczy Wyzwania dnia,
   wyzwań z linku i Szybkiej rundy.
 - „Ciemny motyw” i „Dźwięki” do czasu realizacji (Etap 10) ukryj — nie pokazuj martwych przełączników.
-- „Wyczyść cały postęp” wymaga potwierdzenia w oknie i wraca do Powitania.
+- „Wyczyść cały postęp” wymaga potwierdzenia w oknie („Zostaw postęp” z fokusem, „Wyczyść”) i wraca do Powitania.
+- „Zmień” zamienia imię w karcie na pole z „Zapisz” / „Anuluj” (Escape anuluje); puste imię → „Ty”.
+- Skuteczność: poprawne / wszystkie odpowiedzi (z powtórnymi); kategoria bez odpowiedzi ma „–” i pusty pasek.
+- Przełącznik zegara ma podpis „Dotyczy ścieżek wiedzy. Wyzwania i Szybka runda zawsze mają zegar.”

@@ -7,6 +7,7 @@ import { countDue } from './lib/reviews.ts'
 import type { RoundRequest } from './lib/round.ts'
 import type { Session } from './lib/session.ts'
 import { dailyShareText } from './lib/share.ts'
+import { cleanName } from './lib/progress.ts'
 import { finishRound, leveledUp, levelsAfterExit, type RoundSummary } from './lib/summary.ts'
 import type { Level } from './lib/xp.ts'
 import { appUrl } from './platform/share.ts'
@@ -14,7 +15,9 @@ import { useProgress } from './progress/useProgress.ts'
 import { CategoryScreen } from './screens/CategoryScreen.tsx'
 import { HomeScreen } from './screens/HomeScreen.tsx'
 import { LevelUpScreen } from './screens/LevelUpScreen.tsx'
+import { OnboardingScreen } from './screens/OnboardingScreen.tsx'
 import { PlaceholderScreen } from './screens/PlaceholderScreen.tsx'
+import { ProfileScreen } from './screens/ProfileScreen.tsx'
 import { ResultScreen } from './screens/ResultScreen.tsx'
 import { ReviewsScreen } from './screens/ReviewsScreen.tsx'
 import { RoundScreen } from './screens/RoundScreen.tsx'
@@ -28,6 +31,7 @@ type Screen =
   | { name: 'round'; request: RoundRequest; id: number; back: Place }
   | { name: 'result'; request: RoundRequest; summary: RoundSummary; today: string; back: Place }
   | { name: 'levelUp'; level: Level; then: Screen }
+  | { name: 'onboarding' }
 
 const HOME: Place = { name: 'tab', tab: 'home' }
 
@@ -51,8 +55,11 @@ function resultLabel(request: RoundRequest, summary: RoundSummary): string {
 
 /** Runda → Wynik → (Nowy poziom) → ekran, z którego zaczęto rundę. */
 export function App() {
-  const { progress, updateProgress } = useProgress()
-  const [screen, setScreen] = useState<Screen>(HOME)
+  const { progress, loadStatus, updateProgress } = useProgress()
+  // Brak zapisu albo zapis nieczytelny → Powitanie (EKRANY.md, pkt 1).
+  const [screen, setScreen] = useState<Screen>(() =>
+    loadStatus === 'new' || loadStatus === 'corrupt' ? { name: 'onboarding' } : HOME,
+  )
   const today = toDay(new Date())
   const reviewsDue = countDue(progress.questions, today)
 
@@ -63,6 +70,17 @@ export function App() {
     setScreen(leveledUp(levels) ? { name: 'levelUp', level: levels.levelAfter, then } : then)
 
   switch (screen.name) {
+    case 'onboarding':
+      return (
+        <OnboardingScreen
+          onStart={(name) => {
+            // Zapis od razu — także z pustym imieniem — żeby Powitanie nie wróciło przy następnym uruchomieniu.
+            updateProgress((p) => ({ ...p, name: cleanName(name) }))
+            setScreen(HOME)
+          }}
+        />
+      )
+
     case 'round': {
       const { request, back } = screen
       return (
@@ -141,7 +159,7 @@ export function App() {
           )}
           {screen.tab === 'reviews' && <ReviewsScreen onPlay={(request) => play(request, place)} />}
           {screen.tab === 'ranking' && <PlaceholderScreen title="Ranking" />}
-          {screen.tab === 'profile' && <PlaceholderScreen title="Profil" />}
+          {screen.tab === 'profile' && <ProfileScreen onReset={() => setScreen({ name: 'onboarding' })} />}
           <BottomNav
             active={screen.tab}
             reviewsDue={reviewsDue}

@@ -62,10 +62,10 @@ Makieta: `Powtorki.dc.html`.
 **Gotowe, gdy:** błąd z dzisiejszej rundy widać w kartach z terminem „jutro”, a po przestawieniu daty systemowej
 pytanie pojawia się w „Na dziś” i po poprawnej odpowiedzi przechodzi na „za 3 dni”.
 
-## Etap 6 — Powitanie i profil
+## Etap 6 — Powitanie i profil ✅
 Makiety: `Onboard.dc.html`, `Profil.dc.html`.
-- [ ] Powitanie przy pierwszym uruchomieniu, zapis imienia.
-- [ ] Profil: statystyki, skuteczność w kategoriach, zmiana imienia, ustawienie zegara, wyczyszczenie postępu.
+- [x] Powitanie przy pierwszym uruchomieniu, zapis imienia.
+- [x] Profil: statystyki, skuteczność w kategoriach, zmiana imienia, ustawienie zegara, wyczyszczenie postępu.
 
 **Gotowe, gdy:** nowy użytkownik trafia na Powitanie, a po wyczyszczeniu postępu aplikacja wraca do stanu początkowego.
 

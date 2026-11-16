@@ -1,0 +1,157 @@
+.screen {
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(56px + env(safe-area-inset-top)) var(--space-6) calc(32px + env(safe-area-inset-bottom));
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
+  min-height: calc(100dvh - 88px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.perks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.perkIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.blue {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.orange {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+}
+
+.perkText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perkTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.perkSub {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--color-ink-2);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input {
+  min-height: 54px;
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.input:focus-visible {
+  border-color: var(--color-primary);
+  outline-offset: 0;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.start {
+  min-height: 56px;
+  font-size: 17px;
+}
+
+.note {
+  font-size: 13px;
+  text-align: center;
+  color: var(--color-muted);
+}

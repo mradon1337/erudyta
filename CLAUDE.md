@@ -4,7 +4,7 @@ Quiz wiedzy ogólnej, który uczy (UI po polsku): po każdej odpowiedzi ciekawos
 w powtórkach, wynik można porównać ze znajomymi. React 19 + Vite 8 + TypeScript, CSS Modules, bez backendu
 w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna do 480 px.
 
-**Stan:** Etapy 1–5 gotowe (logika gry w `src/lib/`, Start, ścieżki, runda, wynik, awans, powtórki, nawigacja). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
+**Stan:** Etapy 1–6 gotowe (logika w `src/lib/`; Powitanie, Start, ścieżki, runda, wynik, awans, powtórki, profil). Kolejne kroki są w `docs/PLAN.md` — rób jeden etap naraz, w kolejności.
 
 ## Dokumentacja (czytaj przed pracą nad danym obszarem)
 - `docs/PLAN.md` — etapy z zadaniami i warunkami „gotowe, gdy”. Źródło prawdy o tym, co robić teraz.

@@ -1,0 +1,234 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--space-6) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--nav-height) + var(--space-5) + env(safe-area-inset-bottom));
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+/* Karta imienia */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.avatar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  overflow-wrap: anywhere;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.level {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.change {
+  flex-shrink: 0;
+  min-height: var(--tap-min);
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.change:hover {
+  background: var(--color-bg);
+}
+
+.nameForm {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.input {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.input:focus-visible {
+  border-color: var(--color-primary);
+  outline-offset: 0;
+}
+
+.nameActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.small {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* Statystyki */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.stat dt {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.stat dd.blue {
+  color: var(--color-primary-strong);
+}
+
+.stat dd.orange {
+  color: var(--color-accent-text);
+}
+
+/* Karty sekcji */
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.boxTitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.boxNote {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.cats {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 10px var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.cat {
+  display: contents;
+}
+
+.catBar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-track);
+}
+
+.catFill {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.catFill.weak {
+  background: var(--color-accent-mid);
+}
+
+.catValue {
+  font-weight: 700;
+  text-align: right;
+}
+
+.settings {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.reset {
+  align-self: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-accent-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.reset:hover {
+  background: var(--color-accent-soft);
+}
