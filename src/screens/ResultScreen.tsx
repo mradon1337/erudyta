@@ -40,10 +40,13 @@ function subtitle(s: RoundSummary): string {
     const { from, theirs, outcome } = s.challenge
     const name = from || 'Znajomy'
     const theirScore = theirs.filter(Boolean).length
-    if (outcome === 'win') return `Lepiej niż ${name}: ${s.correct} do ${theirScore}. +${s.challengeBonus} XP za wygraną.`
-    if (outcome === 'draw') return `Remis: ${s.correct} do ${theirScore}.`
-    if (outcome === 'lose') return `${name} tym razem lepiej: ${theirScore} do ${s.correct}.`
-    return `${s.correct} z 10. Wyślij link — znajomi zagrają te same pytania.`
+    // Link z dzisiejszym Wyzwaniem dnia, które nie było jeszcze grane, zalicza też Wyzwanie dnia.
+    const daily = s.dailyBonus > 0 ? ` Do tego +${s.dailyBonus} XP za Wyzwanie dnia.` : ''
+    if (outcome === 'win')
+      return `Lepiej niż ${name}: ${s.correct} do ${theirScore}. +${s.challengeBonus} XP za wygraną.${daily}`
+    if (outcome === 'draw') return `Remis: ${s.correct} do ${theirScore}.${daily}`
+    if (outcome === 'lose') return `${name} tym razem lepiej: ${theirScore} do ${s.correct}.${daily}`
+    return `${s.correct} z ${s.total}. Wyślij link — znajomi zagrają te same pytania.${daily}`
   }
   if (s.training) {
     const daily = s.dailyResults ? ` (${s.dailyResults.filter(Boolean).length}/${s.dailyResults.length})` : ''

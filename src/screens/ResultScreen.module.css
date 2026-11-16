@@ -321,13 +321,6 @@
     margin-top: 38px;
   }
 
-  /* Bez ciekawostek karta powtórki zajmuje całą szerokość. */
-  .screen > .review:nth-child(4),
-  .screen > .clean:nth-child(4) {
-    grid-column: 1 / -1;
-    margin-top: 0;
-  }
-
   .actions {
     justify-self: end;
     width: min(100%, 420px);

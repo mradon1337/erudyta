@@ -58,6 +58,13 @@ Zasady:
   świeży postęp (i Powitanie). Brakujące pola uzupełnij wartościami domyślnymi. Wpisy pytań, których nie ma już
   w bazie, pomijaj przy liczeniu statystyk.
 - **Zapis** po każdej odpowiedzi (nie dopiero po rundzie), żeby zamknięcie karty nie gubiło postępu.
+- **Nieczytelny zapis** przed nadpisaniem trafia pod klucz `erudyta-progress-backup` (do ręcznego odzyskania;
+  istniejącej kopii nie nadpisujemy).
+- **Kilka kart:** każda trzyma postęp w pamięci i zapisuje całość, więc nasłuchujemy zdarzenia `storage`
+  (`externalChange`) i przejmujemy zapis z innej karty, zanim własny zapis by go nadpisał. Nieczytelny zapis
+  z innej karty pomijamy.
+- **Imiona** (z Powitania i z linków) czyści `cleanName`: bez znaków sterujących, zerowej szerokości i sterujących
+  kierunkiem tekstu (U+202A–U+202E, U+2066–U+2069), maks. 20 znaków.
 - Zmiana kształtu danych = nowa wersja `v` i funkcja migracji ze starej.
 - localStorage bywa niedostępny (tryb prywatny). Aplikacja ma wtedy działać w pamięci i pokazać raz informację,
   że postęp nie zostanie zapisany.
@@ -135,9 +142,13 @@ Wartości i nazwy poziomów są w `PRODUKT.md`. Funkcje są czyste:
 - `session.ts` — przebieg rundy jako czyste funkcje: `startSession`, `pick`, `tick`, `fiftyFifty`, `addTime`,
   `next`; zegar liczony z przekazanego `now` (`deadline` gdy tyka, `remainingMs` gdy stoi). Dziennik `log`
   (wybrana odpowiedź i czas od pokazania pytania) zasila ekran Wynik; `xp: false` przy starcie = trening bez XP.
-- `summary.ts` — `finishRound(postęp, sesja, dziś) → { progress, summary }`: zaliczenie dnia serii, bonus i zapis
+- `summary.ts` — `recordAnswer(postęp, sesja, dziś)`: zapis każdej odpowiedzi (powtórki, XP, bieżący wynik
+  Wyzwania dnia). `finishRound(postęp, sesja, dziś) → { progress, summary }`: zaliczenie dnia serii, bonus i zapis
   Wyzwania dnia, rekord Szybkiej rundy, dane ekranu Wynik (błędy, ciekawostki, średni czas, poziom przed i po);
   `levelsAfterExit` dla przerwanej rundy, `roundComment` — komentarz wg wyniku.
+- `daily.ts` — `dailyRules(żądanie, postęp, dziś) → { xp, countsAsDaily }`: czy runda daje XP i czy jej wynik jest
+  wynikiem Wyzwania dnia (także link z dzisiejszym ziarnem `d…`); `recordDailyProgress` — wynik dnia w trakcie rundy
+  (pytania bez odpowiedzi jako błędne). Wynik w sesji: pole `countsAsDaily`.
 - `home.ts` — `greeting(godzina)`, `untilMidnight(teraz)`, `pathStats` (opanowane / w powtórkach / nowe, procent
   w dół), `factCollection` (opanowane pytania kategorii od ostatnio opanowanych).
 - `profile.ts` — `profileStats` (odpowiedzi, skuteczność, opanowane, skuteczność w kategoriach malejąco), `initial`.

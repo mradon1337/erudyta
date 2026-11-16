@@ -4,10 +4,12 @@
  */
 export function registerServiceWorker(onUpdate: () => void): void {
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return
-  // Strona bez kontrolera to pierwsza instalacja — wtedy nie ma czego odświeżać.
-  const hadController = navigator.serviceWorker.controller !== null
+  // Pierwsze przejęcie strony (świeża instalacja) to nie aktualizacja — wtedy nie ma czego odświeżać.
+  // Każde kolejne, także w tej samej sesji, oznacza nową wersję.
+  let controlled = navigator.serviceWorker.controller !== null
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (hadController) onUpdate()
+    if (controlled) onUpdate()
+    controlled = true
   })
   const register = () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {

@@ -25,6 +25,8 @@ Dolna nawigacja (Start, Powtórki, Ranking, Profil) jest widoczna tylko na tych 
 przycisk „Zaczynamy”, dopisek o braku konta.
 **Akcje:** „Zaczynamy” zapisuje imię (puste → „Ty”) i tworzy pusty postęp, potem Start.
 **Jeśli aplikację otwarto z linku wyzwania:** po powitaniu przejdź do ekranu Wyzwanie, nie na Start.
+**Zapis nieczytelny** (uszkodzony albo z nieznanej wersji): nad korzyściami komunikat „Nie udało się odczytać
+zapisanego postępu, więc zaczynamy od nowa.” (tło `accent-soft`). Po wyczyszczeniu postępu w Profilu — bez komunikatu.
 
 ## 2. Start — `Main.dc.html`
 **Zawiera, od góry:**
@@ -51,7 +53,8 @@ przycisk „Zaczynamy”, dopisek o braku konta.
 **Warianty wg trybu:** bez zegara (Nauka, Powtórki) — brak pigułki czasu i jokerów; Szybka runda — jeden zegar
 na całą rundę i licznik poprawnych zamiast „Pytanie 2 z 10”; Powtórki — chip pokazuje też etap („Etap 2 z 4”).
 **Zamknięcie (X lub Escape):** okno potwierdzenia „Przerwać rundę?” z przyciskami „Graj dalej” (fokus) i „Przerwij
-rundę”. Zegar w tym czasie nie staje.
+rundę”. Zegar w tym czasie nie staje. W Wyzwaniu dnia tekst ostrzega, że wynik liczy się od razu, a pytania bez
+odpowiedzi będą błędne.
 **Klawiatura:** 1–4 lub A–D wybiera odpowiedź, Enter to „Dalej”. Po przejściu do nowego pytania fokus trafia na jego treść.
 
 ## 4. Wynik — `Wynik.dc.html`
@@ -112,7 +115,8 @@ i przycisk „Na start”. Własny link (to samo ziarno już rozegrane) → od r
 **Już rozegrane:** „To wyzwanie już rozegrane”, werdykt („Wygrana: 9 do 8”), dwa rzędy kratek (nadawca i Ty).
 Za rozegrane uznajemy ziarno z historii wyzwań albo Wyzwanie dnia z tej daty.
 **Bez imienia w linku:** „Masz wyzwanie od znajomego”, awatar „?”.
-**Link wklejony w otwartej karcie** (zmiana samego `#`) też otwiera ten ekran.
+**Link wklejony w otwartej karcie** (zmiana samego `#`) też otwiera ten ekran. Link nigdy nie przerywa Powitania,
+rundy, Wyniku ani awansu — czeka i pokazuje się, gdy gracz wróci na zakładkę albo ścieżkę.
 
 **Wyzwij znajomego** (Start, Ranking): runda 10 pytań z nowym ziarnem `c…`; na Wyniku „Udostępnij” wysyła link
 z własnym wynikiem. W historii takie wyzwanie ma podpis „Twoje wyzwanie · link do wysłania znajomym”.

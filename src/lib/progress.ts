@@ -52,10 +52,16 @@ export function createProgress(): Progress {
   }
 }
 
+/**
+ * Znaki usuwane z imion: sterujące (C0, DEL), zerowej szerokości i sterujące kierunkiem tekstu
+ * (U+202A–U+202E, U+2066–U+2069) — tymi ostatnimi dałoby się w linku „przestawić” wyświetlane imię.
+ */
+// eslint-disable-next-line no-control-regex
+const NAME_JUNK = /[\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff]/g
+
 /** Imię z formularza albo linku: bez znaków sterujących, przycięte, puste → domyślne. */
 export function cleanName(raw: string, fallback = DEFAULT_NAME): string {
-  // eslint-disable-next-line no-control-regex
-  const name = raw.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, NAME_MAX).trim()
+  const name = raw.replace(NAME_JUNK, '').trim().slice(0, NAME_MAX).trim()
   return name || fallback
 }
 

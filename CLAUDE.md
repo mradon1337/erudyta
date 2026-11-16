@@ -25,8 +25,9 @@ w MVP (postęp w localStorage). Aplikacja mobilna w przeglądarce (PWA), kolumna
 - `src/styles/theme.css` — tokeny (kolory, promienie, fonty, odstępy). `src/styles/global.css` — reset i baza.
 - `src/App.tsx` — przełącza ekrany stanem (zakładki, ścieżka, Runda → Wynik → Nowy poziom → powrót).
 - `src/platform/share.ts` — Web Share / schowek (jedyne miejsce z tymi API przeglądarki).
-- Docelowo (patrz `docs/PLAN.md`): `src/lib/` — logika bez Reacta (`rng`, `round`, `session`, `progress`, `reviews`,
-  `xp`, `streak`, `share`, `storage`), `src/progress/` — kontekst postępu, `src/screens/`, `src/components/`.
+- `src/lib/` — logika bez Reacta z testami obok (opis modułów: `docs/DANE.md`, „Pozostałe moduły”),
+  `src/progress/` — kontekst postępu, `src/screens/` — ekrany, `src/components/` — komponenty,
+  `src/platform/` — API przeglądarki (udostępnianie, service worker), `build/` — plugin generujący `sw.js`.
 
 ## Zasady
 - Teksty w UI, komentarze i commity po polsku. Zwroty do użytkownika bez rodzaju („Dobrze!”, nie „Odpowiedziałeś”).

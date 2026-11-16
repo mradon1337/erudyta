@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../components/Button.tsx'
 import { CATEGORY_ICON } from '../components/categoryIcons.ts'
 import { Icon, type IconName } from '../components/Icon.tsx'
@@ -40,7 +40,12 @@ function ModeRow(props: { icon: IconName; title: string; subtitle: string; onCli
 export function HomeScreen({ onPlay, onOpenCategory, onNewChallenge }: Props) {
   const { progress, persistent } = useProgress()
   const [shareMessage, setShareMessage] = useState('')
-  const now = new Date()
+  // Zegar ekranu: „kończy się za …” i dzień Wyzwania dnia aktualizują się co minutę, także o północy.
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 60_000)
+    return () => window.clearInterval(id)
+  }, [])
   const today = toDay(now)
   const streak = currentStreak(progress.streak, today)
   const level = levelFor(progress.xp)

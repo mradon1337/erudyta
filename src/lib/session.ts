@@ -48,6 +48,11 @@ export interface Session {
   lastXp: number
   /** Czy odpowiedzi dają XP (`false` — trening, np. drugie podejście do Wyzwania dnia). */
   xpEnabled: boolean
+  /**
+   * Czy wynik tej rundy jest wynikiem Wyzwania dnia (zapis od pierwszej odpowiedzi, bonus po ukończeniu).
+   * Rozstrzygane na starcie rundy — `daily.ts`, `dailyRules`.
+   */
+  countsAsDaily: boolean
   /** Chwila pokazania bieżącego pytania. */
   shownAt: number
   /** Dziennik odpowiedzi, równoległy do `results`. */
@@ -71,7 +76,7 @@ export function startSession(
   mode: Mode,
   questions: RoundQuestion[],
   now: number,
-  opts: { timer?: TimerKind; xp?: boolean } = {},
+  opts: { timer?: TimerKind; xp?: boolean; daily?: boolean } = {},
 ): Session {
   const timer = opts.timer ?? timerKindFor(mode, true)
   const remainingMs = fullTime(timer)
@@ -92,6 +97,7 @@ export function startSession(
     xp: 0,
     lastXp: 0,
     xpEnabled: opts.xp ?? true,
+    countsAsDaily: opts.daily ?? (mode === 'daily' && opts.xp !== false),
     shownAt: now,
     log: [],
     finished: questions.length === 0,

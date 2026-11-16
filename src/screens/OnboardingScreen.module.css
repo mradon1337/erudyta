@@ -51,6 +51,15 @@
   line-height: 1.1;
 }
 
+.notice {
+  padding: 14px var(--space-4);
+  border-radius: var(--radius-xl);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-deep);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
 .perks {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,8 @@
 import { outcome, recordChallenge, type ChallengeInfo, type Outcome } from './challenges.ts'
-import { pruneDaily, type Progress } from './progress.ts'
+import { recordDailyProgress } from './daily.ts'
+import { applyAnswer, pruneDaily, type Progress } from './progress.ts'
 import type { Mode } from './round.ts'
-import type { Session } from './session.ts'
+import { currentQuestion, type Session } from './session.ts'
 import { completeDay } from './streak.ts'
 import { levelFor, XP, type Level } from './xp.ts'
 
@@ -55,6 +56,23 @@ export function leveledUp(summary: Pick<RoundSummary, 'levelBefore' | 'levelAfte
 }
 
 /**
+ * Zapisuje w postępie ostatnią odpowiedź z sesji: stan pytania (powtórki) i XP, a w rundzie, która jest
+ * Wyzwaniem dnia, także bieżący wynik dnia. Wołane po każdej odpowiedzi, żeby zamknięcie karty nic nie gubiło.
+ */
+export function recordAnswer(progress: Progress, session: Session, today: string): Progress {
+  const q = currentQuestion(session)
+  const last = session.results.at(-1)
+  if (!q || last === undefined) return progress
+  const next = applyAnswer(progress, q.question.id, last, today, {
+    inReview: session.mode === 'review',
+    xp: session.lastXp,
+  })
+  return session.countsAsDaily
+    ? recordDailyProgress(next, today, session.results, session.xp, session.questions.length)
+    : next
+}
+
+/**
  * Zamyka ukończoną rundę: zalicza dzień serii, dolicza bonus za Wyzwanie dnia i zapisuje jego wynik,
  * aktualizuje rekord Szybkiej rundy. Odpowiedzi i ich XP są już w `progress` (zapis po każdej odpowiedzi),
  * więc tu ich nie doliczamy ponownie.
@@ -67,9 +85,9 @@ export function finishRound(
 ): { progress: Progress; summary: RoundSummary } {
   const correct = session.results.filter(Boolean).length
   const xpBefore = Math.max(0, progress.xp - session.xp)
-  const training = session.mode === 'daily' && !session.xpEnabled
-
-  const isDaily = session.mode === 'daily' && !training
+  // Wyzwanie dnia rozegrane już wcześniej (także przerwane) — to podejście jest treningiem.
+  const training = session.mode === 'daily' && !session.countsAsDaily
+  const isDaily = session.countsAsDaily
   const dailyBonus = isDaily ? XP.dailyBonus : 0
 
   const info = session.mode === 'challenge' ? (opts.challenge ?? null) : null

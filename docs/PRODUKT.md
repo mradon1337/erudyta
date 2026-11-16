@@ -18,12 +18,12 @@ a pytania z błędną odpowiedzią wracają w powtórkach, aż zostaną zapamię
 
 | Tryb | Pytania | Zegar | Jokery | Uwagi |
 |---|---|---|---|---|
-| Wyzwanie dnia | 10, ziarno = data lokalna | 20 s na pytanie | tak | Wynik liczy się raz dziennie; kolejne podejścia to trening bez XP |
+| Wyzwanie dnia | 10, ziarno = data lokalna | 20 s na pytanie | tak | Wynik liczy się raz dziennie, od pierwszej odpowiedzi; kolejne podejścia to trening bez XP |
 | Ścieżka wiedzy (kategoria) | 10 z kategorii | 20 s | tak | Wariant „Bez zegara” z ekranu ścieżki |
 | Szybka runda | bez limitu | 60 s łącznie | nie | Zegar stoi, gdy widać ciekawostkę; liczy się rekord poprawnych |
 | Nauka bez stresu | 10 mieszanych | brak | nie | Dla nauki, nie dla wyniku |
 | Powtórki | do 20 zaległych | brak | nie | Tylko pytania z terminem na dziś lub wcześniej |
-| Wyzwanie z linku | 10, ziarno z linku | 20 s | tak | Po rundzie porównanie z wynikiem nadawcy |
+| Wyzwanie z linku | 10, ziarno z linku | 20 s | tak | Po rundzie porównanie z wynikiem nadawcy; link z dzisiejszym, jeszcze niegranym Wyzwaniem dnia zalicza też Wyzwanie dnia |
 | Pojedynek na żywo, liga | — | — | — | Wymagają serwera — Etap 9 |
 
 Dobór pytań poza trybami z ziarnem: najpierw nigdy niewidziane, potem nieopanowane, na końcu opanowane
@@ -38,6 +38,9 @@ Dobór pytań poza trybami z ziarnem: najpierw nigdy niewidziane, potem nieopano
   (na ostatnim pytaniu „Zobacz wynik”). Nie ma automatycznego przejścia — użytkownik czyta w swoim tempie.
 - **Wyjście z rundy** (X): pyta o potwierdzenie; przerwana runda nie daje serii ani bonusu za ukończenie,
   ale udzielone odpowiedzi i XP zostają zapisane.
+- **Przerwane Wyzwanie dnia** (także zamknięta karta) jest rozegrane: wynik zapisuje się od pierwszej odpowiedzi,
+  pytania bez odpowiedzi liczą się jako błędne, a kolejne podejście tego dnia to trening bez XP. Inaczej dałoby się
+  przerywać i zaczynać od nowa po pełne XP.
 
 ## Punkty i poziomy
 - Poprawna odpowiedź: **20 XP**. Bonus za szybkość: **+5 XP**, gdy zostało co najmniej 10 s (tylko z zegarem).

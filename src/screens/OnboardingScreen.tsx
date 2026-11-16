@@ -5,6 +5,8 @@ import { NAME_MAX } from '../lib/progress.ts'
 import styles from './OnboardingScreen.module.css'
 
 interface Props {
+  /** Zapisanego postępu nie dało się odczytać — wyjaśniamy, dlaczego znów jest Powitanie. */
+  notice?: boolean
   /** Imię z pola (może być puste — wtedy zostaje domyślne). */
   onStart: (name: string) => void
 }
@@ -31,7 +33,7 @@ const PERKS: readonly { icon: IconName; tone: 'blue' | 'orange'; title: string; 
 ]
 
 /** Powitanie przy pierwszym uruchomieniu (i po wyczyszczeniu postępu). */
-export function OnboardingScreen({ onStart }: Props) {
+export function OnboardingScreen({ notice = false, onStart }: Props) {
   const [name, setName] = useState('')
   const inputId = useId()
   const hintId = useId()
@@ -53,6 +55,12 @@ export function OnboardingScreen({ onStart }: Props) {
           </div>
 
           <h1 className={styles.title}>Wiedza ogólna po 3 minuty dziennie.</h1>
+
+          {notice && (
+            <p className={styles.notice} role="status">
+              Nie udało się odczytać zapisanego postępu, więc zaczynamy od nowa.
+            </p>
+          )}
 
           <ul className={styles.perks}>
             {PERKS.map((p) => (

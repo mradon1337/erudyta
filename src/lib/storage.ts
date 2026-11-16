@@ -12,6 +12,8 @@ import type { Box, QuestionState } from './reviews.ts'
 import type { Streak } from './streak.ts'
 
 export const STORAGE_KEY = 'erudyta-progress-v1'
+/** Kopia zapisu, którego nie dało się odczytać — żeby nadpisanie świeżym postępem nie zniszczyło go na zawsze. */
+export const BACKUP_KEY = 'erudyta-progress-backup'
 
 /** Część API `Storage`, której potrzebujemy — w testach wystarczy prosty obiekt. */
 export type KeyValueStore = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
@@ -52,7 +54,38 @@ export function loadProgress(store: KeyValueStore | null): LoadResult {
   }
   if (raw === null) return { progress: createProgress(), status: 'new' }
   const progress = parseProgress(raw)
-  return progress ? { progress, status: 'ok' } : { progress: createProgress(), status: 'corrupt' }
+  if (progress) return { progress, status: 'ok' }
+  backupUnreadable(store, raw)
+  return { progress: createProgress(), status: 'corrupt' }
+}
+
+/**
+ * Odkłada nieczytelny zapis pod `BACKUP_KEY` (do ręcznego odzyskania). Istniejącej kopii nie nadpisuje:
+ * pierwsza zwykle zawiera najdłuższą historię, a kolejne powstają już po starcie od zera.
+ */
+function backupUnreadable(store: KeyValueStore, raw: string): void {
+  try {
+    if (store.getItem(BACKUP_KEY) === null) store.setItem(BACKUP_KEY, raw)
+  } catch {
+    // Brak miejsca albo zablokowany magazyn — kopii nie będzie, ale aplikacja działa dalej.
+  }
+}
+
+/** Co zrobić ze zmianą zapisu wykonaną w innej karcie (zdarzenie `storage`). */
+export type ExternalChange = { kind: 'progress'; progress: Progress } | { kind: 'cleared' } | { kind: 'ignore' }
+
+/**
+ * Odczyt zdarzenia `storage` z innej karty. Bez tego dwie otwarte karty nadpisywałyby sobie postęp:
+ * każda trzyma własną kopię w pamięci i zapisuje całość przy każdej odpowiedzi.
+ */
+export function externalChange(key: string | null, newValue: string | null): ExternalChange {
+  // `key === null` — inna karta wyczyściła cały localStorage.
+  if (key === null) return { kind: 'cleared' }
+  if (key !== STORAGE_KEY) return { kind: 'ignore' }
+  if (newValue === null) return { kind: 'cleared' }
+  const progress = parseProgress(newValue)
+  // Nieczytelny zapis z innej karty pomijamy — lepiej zostać przy własnym, poprawnym stanie.
+  return progress ? { kind: 'progress', progress } : { kind: 'ignore' }
 }
 
 /** Zapisuje postęp; `false`, gdy się nie udało (brak miejsca, zablokowany localStorage). */

@@ -175,18 +175,21 @@
 }
 
 .cats {
-  display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) 40px;
-  align-items: center;
-  gap: 10px var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: 13px;
 }
 
+/* Każdy wiersz to osobna siatka (bez `display: contents`, które w części przeglądarek gubi semantykę listy). */
 .cat {
-  display: contents;
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .catBar {
@@ -269,7 +272,7 @@
     justify-self: start;
   }
 
-  .cats {
+  .cat {
     grid-template-columns: 140px minmax(0, 1fr) 44px;
   }
 }

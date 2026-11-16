@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { createProgress, type Progress } from './progress.ts'
-import { clearProgress, loadProgress, normalizeProgress, parseProgress, saveProgress, STORAGE_KEY, type KeyValueStore } from './storage.ts'
+import {
+  BACKUP_KEY,
+  clearProgress,
+  externalChange,
+  loadProgress,
+  normalizeProgress,
+  parseProgress,
+  saveProgress,
+  STORAGE_KEY,
+  type KeyValueStore,
+} from './storage.ts'
 
 function memoryStore(initial: Record<string, string> = {}): KeyValueStore & { data: Record<string, string> } {
   const data = { ...initial }
@@ -127,5 +137,57 @@ describe('normalizeProgress', () => {
   it('parseProgress zwraca null dla złego JSON-a', () => {
     expect(parseProgress('{')).toBeNull()
     expect(parseProgress(JSON.stringify(sample()))).toEqual(sample())
+  })
+})
+
+describe('nieczytelny zapis', () => {
+  it('trafia do kopii, zanim świeży postęp go nadpisze', () => {
+    const store = memoryStore({ [STORAGE_KEY]: '{zepsute' })
+    expect(loadProgress(store).status).toBe('corrupt')
+    expect(store.data[BACKUP_KEY]).toBe('{zepsute')
+    saveProgress(store, createProgress())
+    expect(store.data[BACKUP_KEY]).toBe('{zepsute')
+  })
+
+  it('istniejącej kopii nie nadpisuje', () => {
+    const store = memoryStore({ [STORAGE_KEY]: '{drugi', [BACKUP_KEY]: '{pierwszy' })
+    loadProgress(store)
+    expect(store.data[BACKUP_KEY]).toBe('{pierwszy')
+  })
+
+  it('nieznana wersja też trafia do kopii', () => {
+    const raw = JSON.stringify({ ...sample(), v: 99 })
+    const store = memoryStore({ [STORAGE_KEY]: raw })
+    expect(loadProgress(store).status).toBe('corrupt')
+    expect(store.data[BACKUP_KEY]).toBe(raw)
+  })
+
+  it('brak miejsca na kopię nie psuje startu', () => {
+    const store: KeyValueStore = {
+      getItem: (k) => (k === STORAGE_KEY ? '{zepsute' : null),
+      setItem: () => {
+        throw new Error('QuotaExceededError')
+      },
+      removeItem: () => {},
+    }
+    expect(loadProgress(store).status).toBe('corrupt')
+  })
+})
+
+describe('zmiana zapisu w innej karcie', () => {
+  it('nowy postęp z innej karty jest przejmowany', () => {
+    const p = sample()
+    expect(externalChange(STORAGE_KEY, JSON.stringify(p))).toEqual({ kind: 'progress', progress: p })
+  })
+
+  it('wyczyszczenie postępu albo całego magazynu w innej karcie', () => {
+    expect(externalChange(STORAGE_KEY, null)).toEqual({ kind: 'cleared' })
+    expect(externalChange(null, null)).toEqual({ kind: 'cleared' })
+  })
+
+  it('inne klucze i nieczytelny zapis są pomijane', () => {
+    expect(externalChange(BACKUP_KEY, '{}')).toEqual({ kind: 'ignore' })
+    expect(externalChange('coś-innego', 'x')).toEqual({ kind: 'ignore' })
+    expect(externalChange(STORAGE_KEY, '{zepsute')).toEqual({ kind: 'ignore' })
   })
 })

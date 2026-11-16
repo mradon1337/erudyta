@@ -33,9 +33,9 @@ type Screen =
   | Place
   | { name: 'round'; request: RoundRequest; id: number; back: Place; challenge?: ChallengeInfo }
   | { name: 'result'; request: RoundRequest; summary: RoundSummary; today: string; back: Place }
-  | { name: 'challenge'; link: ChallengeLink }
   | { name: 'levelUp'; level: Level; then: Screen }
-  | { name: 'onboarding'; then: Screen }
+  /** `notice` — zapisu nie dało się odczytać, więc Powitanie wyjaśnia start od zera. */
+  | { name: 'onboarding'; notice: boolean }
 
 type ChallengeLink = Exclude<ParseResult, { status: 'none' }>
 
@@ -59,23 +59,31 @@ function resultLabel(request: RoundRequest, summary: RoundSummary): string {
   }
 }
 
+const isPlace = (s: Screen): s is Place => s.name === 'tab' || s.name === 'category'
+
+interface Props {
+  /** Wyzwanie z adresu przy starcie (odczytane w `main.tsx`, zanim React zacznie renderować). */
+  initialLink: ParseResult
+}
+
 /** Runda → Wynik → (Nowy poziom) → ekran, z którego zaczęto rundę. */
-export function App() {
+export function App({ initialLink }: Props) {
   const { progress, loadStatus, updateProgress } = useProgress()
-  // Brak zapisu albo zapis nieczytelny → Powitanie (EKRANY.md, pkt 1); link z wyzwaniem → ekran Wyzwania
-  // (dla nowego gracza po Powitaniu).
-  const [screen, setScreen] = useState<Screen>(() => {
-    const link = takeChallengeFromUrl(QUESTIONS.length)
-    const first: Screen = link.status === 'none' ? HOME : { name: 'challenge', link }
-    return loadStatus === 'new' || loadStatus === 'corrupt' ? { name: 'onboarding', then: first } : first
-  })
+  // Brak zapisu albo zapis nieczytelny → Powitanie (EKRANY.md, pkt 1).
+  const [screen, setScreen] = useState<Screen>(() =>
+    loadStatus === 'new' || loadStatus === 'corrupt' ? { name: 'onboarding', notice: loadStatus === 'corrupt' } : HOME,
+  )
+  // Wyzwanie z linku czeka, aż gracz będzie na zwykłym ekranie (zakładka, ścieżka): nie przerywa Powitania,
+  // rundy, wyniku ani awansu.
+  const [pendingLink, setPendingLink] = useState<ChallengeLink | null>(
+    initialLink.status === 'none' ? null : initialLink,
+  )
 
   // Link wklejony w otwartej już karcie zmienia tylko część `#` — bez przeładowania strony.
   useEffect(() => {
     const onHash = () => {
       const link = takeChallengeFromUrl(QUESTIONS.length)
-      if (link.status === 'none') return
-      setScreen((s) => (s.name === 'onboarding' ? { ...s, then: { name: 'challenge', link } } : { name: 'challenge', link }))
+      if (link.status !== 'none') setPendingLink(link)
     }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
@@ -96,14 +104,32 @@ export function App() {
   const leave = (levels: { levelBefore: Level; levelAfter: Level }, then: Screen) =>
     setScreen(leveledUp(levels) ? { name: 'levelUp', level: levels.levelAfter, then } : then)
 
+  if (pendingLink && isPlace(screen)) {
+    return (
+      <ChallengeScreen
+        key={JSON.stringify(pendingLink)}
+        link={pendingLink}
+        onAccept={(challenge) => {
+          setPendingLink(null)
+          play({ mode: 'challenge', seed: challenge.seed }, HOME, challenge)
+        }}
+        onClose={() => {
+          setPendingLink(null)
+          setScreen(HOME)
+        }}
+      />
+    )
+  }
+
   switch (screen.name) {
     case 'onboarding':
       return (
         <OnboardingScreen
+          notice={screen.notice}
           onStart={(name) => {
             // Zapis od razu — także z pustym imieniem — żeby Powitanie nie wróciło przy następnym uruchomieniu.
             updateProgress((p) => ({ ...p, name: cleanName(name) }))
-            setScreen(screen.then)
+            setScreen(HOME)
           }}
         />
       )
@@ -161,16 +187,6 @@ export function App() {
       )
     }
 
-    case 'challenge':
-      return (
-        <ChallengeScreen
-          key={JSON.stringify(screen.link)}
-          link={screen.link}
-          onAccept={(challenge) => play({ mode: 'challenge', seed: challenge.seed }, HOME, challenge)}
-          onClose={() => setScreen(HOME)}
-        />
-      )
-
     case 'category': {
       const place: Place = screen
       return (
@@ -196,7 +212,7 @@ export function App() {
           )}
           {screen.tab === 'reviews' && <ReviewsScreen onPlay={(request) => play(request, place)} />}
           {screen.tab === 'ranking' && <RankingScreen onNewChallenge={() => newChallenge(place)} />}
-          {screen.tab === 'profile' && <ProfileScreen onReset={() => setScreen({ name: 'onboarding', then: HOME })} />}
+          {screen.tab === 'profile' && <ProfileScreen onReset={() => setScreen({ name: 'onboarding', notice: false })} />}
           <BottomNav
             active={screen.tab}
             reviewsDue={reviewsDue}

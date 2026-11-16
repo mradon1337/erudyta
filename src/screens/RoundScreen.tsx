@@ -6,8 +6,8 @@ import { FeedbackSheet } from '../components/FeedbackSheet.tsx'
 import { Icon } from '../components/Icon.tsx'
 import { RoundHeader } from '../components/RoundHeader.tsx'
 import { categoryName } from '../data/categories.ts'
+import { dailyRules } from '../lib/daily.ts'
 import { toDay } from '../lib/dates.ts'
-import { applyAnswer } from '../lib/progress.ts'
 import { buildRound, refillQuick, type RoundRequest } from '../lib/round.ts'
 import {
   addTime,
@@ -25,6 +25,7 @@ import {
   WARN_SECONDS,
   type Session,
 } from '../lib/session.ts'
+import { recordAnswer } from '../lib/summary.ts'
 import { useProgress } from '../progress/useProgress.ts'
 import styles from './RoundScreen.module.css'
 
@@ -64,11 +65,12 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
     const questions = buildRound(request, { states: progress.questions, today, rand: Math.random })
     const noTimer = request.mode === 'category' && request.noTimer === true
     const timer = timerKindFor(request.mode, progress.settings.timer && !noTimer)
-    // Wynik Wyzwania dnia liczy się raz dziennie; kolejne podejścia to trening bez XP.
-    const xp = !(request.mode === 'daily' && progress.daily[today] !== undefined)
+    // Wynik Wyzwania dnia liczy się raz dziennie, od pierwszej odpowiedzi; kolejne podejścia to trening bez XP.
+    const { xp, countsAsDaily } = dailyRules(request, progress, today)
     // Etap powtórki z chwili startu rundy — chip pokazuje go także po odpowiedzi, która go zmienia.
     const boxes = new Map(questions.map((q) => [q.question.id, progress.questions[q.question.id]?.box ?? 0]))
-    return { today, now, boxes, session: startSession(request.mode, questions, now, { timer, xp }) }
+    const session = startSession(request.mode, questions, now, { timer, xp, daily: countsAsDaily })
+    return { today, now, boxes, session }
   })
   const [session, setSession] = useState(setup.session)
   const [now, setNow] = useState(setup.now)
@@ -89,13 +91,7 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
       setSession(nextState)
 
       if (nextState.results.length > prev.results.length) {
-        const q = currentQuestion(nextState)
-        const correct = nextState.results[nextState.results.length - 1] === true
-        if (q) {
-          updateProgress((p) =>
-            applyAnswer(p, q.question.id, correct, today, { inReview: nextState.mode === 'review', xp: nextState.lastXp }),
-          )
-        }
+        updateProgress((p) => recordAnswer(p, nextState, today))
       }
       if (nextState.finished && !prev.finished) onFinish(nextState, today)
     },
@@ -105,6 +101,11 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
   const goNext = useCallback(() => {
     apply((s, at) => next(s, at, () => refillQuick(currentQuestion(s)?.question.id ?? null, Math.random)))
   }, [apply])
+
+  // Runda bez pytań (np. powtórki rozwiązane w innej karcie): od razu wracamy, zamiast pokazać pusty ekran.
+  useEffect(() => {
+    if (setup.session.finished) onExit(setup.session)
+  }, [setup.session, onExit])
 
   const running = session.deadline !== null
   useEffect(() => {
@@ -239,7 +240,11 @@ export function RoundScreen({ request, onFinish, onExit }: Props) {
       <ConfirmDialog
         open={confirmOpen}
         title="Przerwać rundę?"
-        text="Udzielone odpowiedzi i zdobyte XP zostaną zapisane, ale przerwana runda nie zalicza dnia serii."
+        text={
+          session.countsAsDaily
+            ? 'Odpowiedzi i XP zostaną zapisane. Wynik Wyzwania dnia liczy się od razu: pytania bez odpowiedzi będą błędne, a przerwana runda nie zalicza dnia serii.'
+            : 'Udzielone odpowiedzi i zdobyte XP zostaną zapisane, ale przerwana runda nie zalicza dnia serii.'
+        }
         cancelLabel="Graj dalej"
         confirmLabel="Przerwij rundę"
         onCancel={() => setConfirmOpen(false)}

@@ -1,6 +1,13 @@
-import { useCallback, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createProgress, type Progress } from '../lib/progress.ts'
-import { browserStore, clearProgress, loadProgress, saveProgress, type KeyValueStore } from '../lib/storage.ts'
+import {
+  browserStore,
+  clearProgress,
+  externalChange,
+  loadProgress,
+  saveProgress,
+  type KeyValueStore,
+} from '../lib/storage.ts'
 import { ProgressContext, type ProgressContextValue } from './progressContext.ts'
 
 interface Props {
@@ -11,8 +18,9 @@ interface Props {
 
 export function ProgressProvider({ children, store }: Props) {
   const [initial] = useState(() => {
-    const s = store === undefined ? browserStore() : store
-    return { store: s, ...loadProgress(s) }
+    const browser = store === undefined
+    const s = browser ? browserStore() : store
+    return { store: s, browser: browser && s !== null, ...loadProgress(s) }
   })
   const [progress, setProgress] = useState<Progress>(initial.progress)
   const [persistent, setPersistent] = useState(initial.status !== 'unavailable')
@@ -28,6 +36,21 @@ export function ProgressProvider({ children, store }: Props) {
     },
     [initial.store],
   )
+
+  // Inna karta z aplikacją zapisała postęp → przejmujemy go, zanim nasz następny zapis by go nadpisał.
+  useEffect(() => {
+    if (!initial.browser) return
+    const onStorage = (e: StorageEvent) => {
+      if (e.storageArea !== window.localStorage) return
+      const change = externalChange(e.key, e.newValue)
+      if (change.kind === 'ignore') return
+      const next = change.kind === 'progress' ? change.progress : createProgress()
+      current.current = next
+      setProgress(next)
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [initial.browser])
 
   const updateProgress = useCallback(
     (change: (p: Progress) => Progress) => {

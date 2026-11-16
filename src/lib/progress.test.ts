@@ -26,3 +26,23 @@ describe('progress', () => {
     expect(Object.keys(pruneDaily(daily, '2026-11-15'))).toEqual(['2026-10-17', '2026-11-15'])
   })
 })
+
+describe('cleanName — znaki niewidoczne i sterujące kierunkiem tekstu', () => {
+  // Kody znaków zamiast samych znaków: w pliku byłyby niewidoczne.
+  const ch = (...codes: number[]) => String.fromCharCode(...codes)
+
+  it('usuwa znaki zmieniające kierunek tekstu (podszywanie się pod inne imię w linku)', () => {
+    expect(cleanName('Ka' + ch(0x202e) + 'sia')).toBe('Kasia')
+    expect(cleanName(ch(0x2066) + 'Ola' + ch(0x2069))).toBe('Ola')
+    expect(cleanName(ch(0x200f) + 'Ewa' + ch(0x200e))).toBe('Ewa')
+  })
+
+  it('usuwa znaki zerowej szerokości i BOM', () => {
+    expect(cleanName('A' + ch(0x200b) + 'na' + ch(0xfeff))).toBe('Ana')
+    expect(cleanName(ch(0x200b, 0x200b))).toBe('Ty')
+  })
+
+  it('zostawia polskie litery', () => {
+    expect(cleanName('Łucja Żółć')).toBe('Łucja Żółć')
+  })
+})

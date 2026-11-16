@@ -202,3 +202,16 @@ describe('dziennik odpowiedzi i trening', () => {
     expect(s).toMatchObject({ results: [true], xp: 0, lastXp: 0 })
   })
 })
+
+describe('czy runda jest Wyzwaniem dnia', () => {
+  it('domyślnie: tylko Wyzwanie dnia z XP', () => {
+    expect(startSession('daily', questions(2), T0).countsAsDaily).toBe(true)
+    expect(startSession('daily', questions(2), T0, { xp: false }).countsAsDaily).toBe(false)
+    expect(startSession('challenge', questions(2), T0).countsAsDaily).toBe(false)
+    expect(startSession('learn', questions(2), T0).countsAsDaily).toBe(false)
+  })
+
+  it('jawnie z zasad startu (np. link z dzisiejszym Wyzwaniem dnia)', () => {
+    expect(startSession('challenge', questions(2), T0, { daily: true }).countsAsDaily).toBe(true)
+  })
+})
