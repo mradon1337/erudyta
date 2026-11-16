@@ -1,4 +1,4 @@
-﻿# Ekrany
+# Ekrany
 
 Każdy ekran ma makietę w `design/project/`. Liczby i imiona na makietach to dane przykładowe.
 Zasady gry: `PRODUKT.md`. Wygląd komponentów: `DESIGN.md`. Dane: `DANE.md`.
